@@ -233,7 +233,6 @@
                     <li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Persistent State</li>
                     <li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Reconciliation</li>
                     <li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Account-Level Risk Management</li>
-                    <li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Support Included</li>
                 </ul>
                 <button onclick="showPurchaseModal('lite')" class="btn-secondary text-xl font-semibold py-3 px-10 rounded-lg shadow-lg w-full">
                     Get Now for $49.99
@@ -249,7 +248,6 @@
                     <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> All Features (Including Options)</li>
                     <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Unique License Key</li>
                     <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Immediate Download</li>
-                    <li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Support Included</li>
                 </ul>
                 <button onclick="showPurchaseModal('full')" class="btn-primary text-xl font-semibold py-3 px-10 rounded-lg shadow-lg w-full">
                     Buy Now for $199.99
@@ -271,18 +269,14 @@
             <h3 id="modalTitle" class="text-2xl font-bold text-white mb-4"></h3>
             <p id="modalMessage" class="text-gray-300 mb-6"></p>
             
-            <!-- Placeholder for payment form -->
-            <div id="paymentFormPlaceholder" class="bg-gray-700 p-4 rounded-lg mb-6 text-center">
-                <p class="text-yellow-300 font-semibold mb-2">Payment Integration Placeholder</p>
-                <p class="text-gray-400">In a real application, a secure payment gateway (e.g., Stripe, PayPal) would be embedded here.</p>
-                <p class="text-gray-400 mt-2">After successful payment, your download/license key will be sent.</p>
-            </div>
+            <!-- PayPal button container -->
+            <div id="paypal-button-container"></div>
 
-            <button onclick="simulatePostPayment()" class="btn-primary text-lg py-2 px-6 rounded-lg shadow-md w-full">
-                Simulate Payment & Get Access
-            </button>
         </div>
     </div>
+
+    <!-- PayPal JavaScript SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
 
     <script>
         // Function to scroll smoothly to a section
@@ -294,13 +288,11 @@
         const purchaseModal = document.getElementById('purchaseModal');
         const modalTitle = document.getElementById('modalTitle');
         const modalMessage = document.getElementById('modalMessage');
-        const paymentFormPlaceholder = document.getElementById('paymentFormPlaceholder');
         let currentVersion = ''; // To track which version is being purchased
 
         function showPurchaseModal(version) {
             currentVersion = version;
-            paymentFormPlaceholder.classList.remove('hidden'); // Ensure payment placeholder is visible
-
+            
             if (version === 'full') {
                 modalTitle.textContent = 'Purchase TradeBotPro Pro Version';
                 modalMessage.textContent = 'To complete your purchase, proceed with payment. Your unique license key and download link will be sent to your email address after successful payment.';
@@ -309,10 +301,15 @@
                 modalMessage.textContent = 'To complete your purchase, proceed with payment. Your download link will be available after successful payment.';
             }
             purchaseModal.classList.remove('hidden');
+
+            // Render PayPal buttons when modal is shown
+            renderPayPalButtons(version);
         }
 
         function closeModal() {
             purchaseModal.classList.add('hidden');
+            // Clear PayPal buttons when modal is closed
+            document.getElementById('paypal-button-container').innerHTML = '';
         }
 
         // Close modal if clicked outside content
@@ -322,26 +319,81 @@
             }
         }
 
-        // Simulate post-payment action
-        function simulatePostPayment() {
-            if (currentVersion === 'full') {
-                const licenseKey = generateLicenseKey();
-                alert('Payment simulated successfully!\n\nYour TradeBotPro Pro Version license key has been sent to your email: ' + licenseKey + '\n\nSimulating download...');
-                // In a real scenario, trigger backend to send email and provide actual download link
-            } else { // lite version
-                alert('Payment simulated successfully!\n\nSimulating download of TradeBotPro Lite Version...');
-                // In a real scenario, provide actual download link
-            }
-            console.log('Download initiated for ' + currentVersion + ' version after simulated payment.');
-            closeModal();
-            // You would replace this with actual download link logic:
-            // window.location.href = 'path/to/your/TradeBotPro.zip';
-        }
+        // Function to render PayPal buttons
+        function renderPayPalButtons(version) {
+            paypal.Buttons({
+                // Set up the transaction
+                createOrder: function(data, actions) {
+                    // Call your backend to create the PayPal order
+                    return fetch('/api/create-paypal-order', {
+                        method: 'post',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            product: version // 'lite' or 'pro'
+                        })
+                    }).then(function(res) {
+                        if (!res.ok) {
+                            return res.json().then(error => Promise.reject(error));
+                        }
+                        return res.json();
+                    }).then(function(orderData) {
+                        return orderData.orderID; // Return the order ID from your backend
+                    }).catch(function(error) {
+                        console.error('Error creating PayPal order:', error);
+                        alert('Could not initiate payment. Please try again later.');
+                        closeModal();
+                        return Promise.reject(error); // Propagate error to PayPal SDK
+                    });
+                },
 
-        // Generate a simple UUID-like license key (client-side for demo purposes)
-        function generateLicenseKey() {
-            return 'TBPRO-' + Math.random().toString(36).substring(2, 15).toUpperCase() + '-' +
-                   Math.random().toString(36).substring(2, 15).toUpperCase();
+                // Finalize the transaction
+                onApprove: function(data, actions) {
+                    // Call your backend to capture the PayPal order
+                    return fetch('/api/capture-paypal-order', {
+                        method: 'post',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            orderID: data.orderID // The order ID from PayPal
+                        })
+                    }).then(function(res) {
+                        if (!res.ok) {
+                            return res.json().then(error => Promise.reject(error));
+                        }
+                        return res.json();
+                    }).then(function(captureData) {
+                        // Handle successful capture (e.g., show success message, trigger download)
+                        if (captureData.status === 'success') {
+                            alert('Payment successful! Your download and license key (if applicable) will be sent to your email.');
+                            closeModal();
+                            // You might redirect to a success page or update the UI
+                            // window.location.href = 'success.html'; // Example redirect
+                        } else {
+                            alert('Payment failed: ' + captureData.message);
+                        }
+                    }).catch(function(error) {
+                        console.error('Error capturing PayPal order:', error);
+                        alert('An error occurred during payment capture. Please try again.');
+                        closeModal();
+                    });
+                },
+
+                // Handle payment cancellation
+                onCancel: function(data) {
+                    alert('Payment cancelled.');
+                    closeModal();
+                },
+
+                // Handle errors
+                onError: function(err) {
+                    console.error('PayPal button error:', err);
+                    alert('An error occurred during the PayPal payment process. Please try again.');
+                    closeModal();
+                }
+            }).render('#paypal-button-container'); // Render the buttons into the container
         }
     </script>
 </body>
