@@ -121,9 +121,9 @@
         </div>
         <nav>
             <a href="#features" onclick="scrollToSection('features')" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Features</a>
-            <a class='text-gray-300 hover:text-white px-4 py-2 rounded-md' href='/feature_breakdown'>Feature Breakdown</a>
+            <a href="feature_breakdown.html" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Feature Breakdown</a>
             <a href="#pricing" onclick="scrollToSection('pricing')" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Pricing</a>
-            <a class='text-gray-300 hover:text-white px-4 py-2 rounded-md' href='/help'>Help</a>
+            <a href="help.html" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Help</a>
         </nav>
     </header>
 
@@ -275,6 +275,9 @@
         </div>
     </div>
 
+    <!-- PayPal JavaScript SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_LIVE_PAYPAL_CLIENT_ID&currency=USD"></script>
+
     <script>
         // Function to scroll smoothly to a section
         function scrollToSection(id) {
@@ -286,7 +289,6 @@
         const modalTitle = document.getElementById('modalTitle');
         const modalMessage = document.getElementById('modalMessage');
         let currentVersion = ''; // To track which version is being purchased
-        let paypalScriptLoaded = false; // Flag to ensure SDK loads only once
 
         function showPurchaseModal(version) {
             currentVersion = version;
@@ -300,22 +302,8 @@
             }
             purchaseModal.classList.remove('hidden');
 
-            // Dynamically load PayPal SDK if not already loaded
-            if (!paypalScriptLoaded) {
-                const script = document.createElement('script');
-                script.src = "https://www.paypal.com/sdk/js?client-id=AbFAFD99aa0hCnoggRAkKPvSg7i-FBwF1jQvHIqRwIxhgN4nh6fXk_-hxClQj0hCgvbH7m8vT6d2sPHi&currency=USD&data-partner-attribution-id=TradeBotPro";
-                script.onload = function() {
-                    paypalScriptLoaded = true;
-                    renderPayPalButtons(version);
-                };
-                script.onerror = function() {
-                    console.error("Failed to load PayPal SDK script.");
-                    modalMessage.textContent = "Failed to load payment options. Please check your internet connection.";
-                };
-                document.head.appendChild(script);
-            } else {
-                renderPayPalButtons(version);
-            }
+            // Render PayPal buttons when modal is shown
+            renderPayPalButtons(version);
         }
 
         function closeModal() {
@@ -333,20 +321,11 @@
 
         // Function to render PayPal buttons
         function renderPayPalButtons(version) {
-            // Ensure PayPal SDK is available before rendering buttons
-            if (typeof paypal === 'undefined') {
-                console.error("PayPal SDK not loaded. Cannot render buttons.");
-                return;
-            }
-
-            // Clear any existing buttons to prevent duplicates on re-opening modal
-            document.getElementById('paypal-button-container').innerHTML = '';
-
             paypal.Buttons({
                 // Set up the transaction
                 createOrder: function(data, actions) {
                     // Call your backend to create the PayPal order
-                    return fetch('https://tradebotpro-backend-553116950013.europe-west1.run.app/api/create-paypal-order', {
+                    return fetch('YOUR_CLOUD_RUN_SERVICE_URL/api/create-paypal-order', { // <<< REPLACE THIS URL
                         method: 'post',
                         headers: {
                             'content-type': 'application/json'
@@ -363,8 +342,8 @@
                         return orderData.orderID; // Return the order ID from your backend
                     }).catch(function(error) {
                         console.error('Error creating PayPal order:', error);
-                        modalMessage.textContent = 'Could not initiate payment. Please try again later.';
-                        // Do not hide modal, update message in it
+                        alert('Could not initiate payment. Please try again later.');
+                        closeModal();
                         return Promise.reject(error); // Propagate error to PayPal SDK
                     });
                 },
@@ -372,7 +351,7 @@
                 // Finalize the transaction
                 onApprove: function(data, actions) {
                     // Call your backend to capture the PayPal order
-                    return fetch('https://tradebotpro-backend-553116950013.europe-west1.run.app/api/capture-paypal-order', {
+                    return fetch('YOUR_CLOUD_RUN_SERVICE_URL/api/capture-paypal-order', { // <<< REPLACE THIS URL
                         method: 'post',
                         headers: {
                             'content-type': 'application/json'
@@ -397,21 +376,20 @@
                         } else {
                             modalTitle.textContent = 'Payment Failed';
                             modalMessage.textContent = 'Payment failed: ' + (captureData.message || 'Unknown error.');
-                            // Do not hide modal, update message in it
+                            purchaseModal.classList.remove('hidden');
                         }
                     }).catch(function(error) {
                         console.error('Error capturing PayPal order:', error);
                         modalTitle.textContent = 'Payment Error';
                         modalMessage.textContent = 'An error occurred during payment capture. Please try again.';
-                        // Do not hide modal, update message in it
+                        purchaseModal.classList.remove('hidden');
                     });
                 },
 
                 // Handle payment cancellation
                 onCancel: function(data) {
-                    modalTitle.textContent = 'Payment Cancelled';
-                    modalMessage.textContent = 'You have cancelled the payment.';
-                    // Do not hide modal, update message in it
+                    window.location.href = 'cancel.html'; // Redirect to the cancel page
+                    closeModal();
                 },
 
                 // Handle errors
@@ -419,7 +397,7 @@
                     console.error('PayPal button error:', err);
                     modalTitle.textContent = 'PayPal Error';
                     modalMessage.textContent = 'An error occurred during the PayPal payment process. Please try again.';
-                    // Do not hide modal, update message in it
+                    purchaseModal.classList.remove('hidden');
                 }
             }).render('#paypal-button-container'); // Render the buttons into the container
         }
