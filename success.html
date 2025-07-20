@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeBotPro - Purchase Successful!</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* Dark background */
+            color: #e6edf3; /* Light text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 700px;
+            width: 100%;
+        }
+        .btn-download {
+            background-image: linear-gradient(to right, #10B981, #059669); /* Green gradient */
+            transition: all 0.3s ease;
+        }
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(16, 185, 129, 0.4);
+        }
+        .license-key-box {
+            background-color: #2d3748;
+            color: #a0aec0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1em;
+            word-break: break-all; /* Ensures long keys wrap */
+            position: relative;
+            margin-top: 15px;
+        }
+        .copy-button {
+            background-color: #4a5568;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        .copy-button:hover {
+            background-color: #6a7488;
+        }
+        .message-box {
+            background-color: #2d3748;
+            color: #e6edf3;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container">
+        <svg class="w-20 h-20 text-green-500 mx-auto mb-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg>
+        <h1 class="text-4xl font-bold text-white mb-4">Purchase Successful!</h1>
+        <p class="text-gray-300 text-lg mb-8">Thank you for your purchase. Your download is ready!</p>
+
+        <div id="downloadSection" class="mb-8 hidden">
+            <h2 class="text-2xl font-semibold text-green-400 mb-4">Your Download Link:</h2>
+            <a id="downloadLink" href="#" class="btn-download text-xl font-semibold py-3 px-8 rounded-lg shadow-lg inline-block">
+                Download TradeBotPro
+            </a>
+        </div>
+
+        <div id="licenseSection" class="mb-8 hidden">
+            <h2 class="text-2xl font-semibold text-blue-400 mb-4">Your License Key:</h2>
+            <div class="license-key-box">
+                <span id="licenseKeyText"></span>
+            </div>
+            <button onclick="copyLicenseKey()" class="copy-button">Copy License Key</button>
+        </div>
+
+        <div class="message-box">
+            <p class="text-gray-400">
+                You will also receive an email shortly with your download link and license key (if applicable) for your records.
+                If you encounter any issues, please visit our <a href="https://algotbp.com/help.html" class="text-blue-400 hover:underline">Help Guide</a>.
+            </p>
+        </div>
+        
+        <a href="https://algotbp.com" class="text-blue-500 hover:underline mt-8 inline-block">Return to Homepage</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const downloadUrl = sessionStorage.getItem('tradebotpro_download_url');
+            const licenseKey = sessionStorage.getItem('tradebotpro_license_key');
+            const productType = sessionStorage.getItem('tradebotpro_product_type');
+
+            if (downloadUrl) {
+                document.getElementById('downloadSection').classList.remove('hidden');
+                const downloadLinkElement = document.getElementById('downloadLink');
+                downloadLinkElement.href = downloadUrl;
+                if (productType === 'full') {
+                    downloadLinkElement.textContent = 'Download TradeBotPro Pro Version';
+                } else if (productType === 'lite') {
+                    downloadLinkElement.textContent = 'Download TradeBotPro Lite Version';
+                }
+            }
+
+            if (licenseKey && productType === 'full') { // Only show license for Pro
+                document.getElementById('licenseSection').classList.remove('hidden');
+                document.getElementById('licenseKeyText').textContent = licenseKey;
+            }
+
+            // Clear session storage after displaying
+            sessionStorage.removeItem('tradebotpro_download_url');
+            sessionStorage.removeItem('tradebotpro_license_key');
+            sessionStorage.removeItem('tradebotpro_product_type');
+        });
+
+        function copyLicenseKey() {
+            const licenseKeyText = document.getElementById('licenseKeyText').textContent;
+            // Use document.execCommand('copy') as navigator.clipboard.writeText() may not work in iframes
+            const tempInput = document.createElement('textarea');
+            tempInput.value = licenseKeyText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            alert('License key copied to clipboard!'); // Using alert for simplicity, consider custom modal
+        }
+    </script>
+</body>
+</html>
