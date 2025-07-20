@@ -27,6 +27,14 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 15px rgba(16, 185, 129, 0.4);
         }
+        .btn-primary:disabled {
+            background-image: none;
+            background-color: #4a5568; /* Gray background for disabled */
+            cursor: not-allowed;
+            opacity: 0.7;
+            box-shadow: none;
+            transform: none;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -57,8 +65,8 @@
             <p class="text-xl text-gray-300 mb-6">
                 Thank you for your purchase of the <span id="productType" class="font-semibold text-green-400"></span>!
             </p>
-            <p class="text-lg text-gray-300 mb-4">
-                Your download should begin automatically. Your download link and (for Pro Version) your unique license key have also been sent to your email address.
+            <p id="downloadMessage" class="text-lg text-gray-300 mb-4">
+                Your download should begin automatically. Your download link and unique license key have also been sent to your email address.
             </p>
             <div id="licenseKeyDisplay" class="bg-gray-700 p-4 rounded-md mb-6 hidden">
                 <p class="text-sm text-gray-400 mb-2">For your convenience, here is your license key:</p>
@@ -67,7 +75,10 @@
                     Copy License Key
                 </button>
             </div>
-            <p class="text-lg text-gray-300 mb-8">
+            <button id="manualDownloadButton" class="btn-primary text-lg font-semibold py-3 px-8 rounded-lg shadow-lg inline-block mt-4">
+                Download Now (Backup)
+            </button>
+            <p class="text-lg text-gray-300 mb-8 mt-4">
                 Please check your inbox (and spam folder) for the email.
             </p>
             <a href="help.html" class="btn-primary text-lg font-semibold py-3 px-8 rounded-lg shadow-lg inline-block">
@@ -89,6 +100,8 @@
             const productTypeSpan = document.getElementById('productType');
             const licenseKeyDisplay = document.getElementById('licenseKeyDisplay');
             const licenseKeyElement = document.getElementById('licenseKey');
+            const manualDownloadButton = document.getElementById('manualDownloadButton');
+            const downloadMessage = document.getElementById('downloadMessage');
 
             const productType = sessionStorage.getItem('tradebotpro_product_type');
             const licenseKey = sessionStorage.getItem('tradebotpro_license_key');
@@ -100,21 +113,41 @@
                 productTypeSpan.textContent = 'TradeBotPro Bot'; // Fallback
             }
 
-            if (productType === 'full' && licenseKey) {
+            // Display license key for both Lite and Pro now
+            if (licenseKey) {
                 licenseKeyElement.textContent = licenseKey;
                 licenseKeyDisplay.classList.remove('hidden');
             }
 
-            // Trigger immediate download
+            // Handle download logic
             if (downloadUrl) {
+                // Automatic download
                 const a = document.createElement('a');
                 a.href = downloadUrl;
-                // Set the download filename based on product type
                 a.download = productType === 'full' ? 'TradeBotPro_Pro.zip' : 'TradeBotPro_Lite.zip';
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
-                console.log('Download initiated via signed URL.');
+                console.log('Automatic download initiated via signed URL.');
+
+                // Enable manual download button
+                manualDownloadButton.disabled = false;
+                manualDownloadButton.textContent = "Download Now (Backup)";
+                manualDownloadButton.onclick = function() {
+                    const b = document.createElement('a');
+                    b.href = downloadUrl;
+                    b.download = productType === 'full' ? 'TradeBotPro_Pro.zip' : 'TradeBotPro_Lite.zip';
+                    document.body.appendChild(b);
+                    b.click();
+                    document.body.removeChild(b);
+                    console.log('Manual download initiated via signed URL.');
+                };
+            } else {
+                // If download URL is not found, update the message and disable the button
+                downloadMessage.textContent = "The automatic download could not be initiated. Please check your email for the download link and license key.";
+                manualDownloadButton.textContent = "Download Not Available";
+                manualDownloadButton.disabled = true; // Disable the button
+                console.error("Download URL not found in session storage. Displaying alternative message to user.");
             }
 
             // Clear session storage items after use to prevent re-downloads/re-display on refresh
@@ -133,7 +166,6 @@
             textArea.select();
             try {
                 document.execCommand('copy');
-                // Using a simple alert for now, but consider a custom modal for better UX
                 alert('License key copied to clipboard!');
             } catch (err) {
                 console.error('Failed to copy text: ', err);
