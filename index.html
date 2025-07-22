@@ -275,9 +275,18 @@
         </div>
     </div>
 
+    <!-- PayPal JavaScript SDK -->
+    <script 
+        src="https://www.paypal.com/sdk/js?client-id=AbFAFD99aa0hCnoggRAkKPvSg7i-FBwF1jQvHIqRwIxhgN4nh6fXk_-hxClQj0hCgvbH7m8vT6d2sPHi&currency=USD"
+        data-client-metadata-id="algotbp-website-client"
+        data-namespace="paypal_sdk"
+        data-page-type="home"
+        data-sdk-integration-source="integrationbuilder"
+    ></script>
+
     <script>
-        // IMPORTANT: This script block should be placed BEFORE the PayPal SDK script
-        // so that onPayPalSdkLoaded is defined when the SDK's onload attribute calls it.
+        // IMPORTANT: This script block should be placed AFTER the PayPal SDK script
+        // to ensure the 'paypal' object is defined when our code executes.
 
         // IMPORTANT: Replace with your actual deployed Google Cloud Run URL
         const BACKEND_BASE_URL = "https://tradebotpro-backend-553116950013.us-central1.run.app";
@@ -285,15 +294,15 @@
         let isPayPalSdkReady = false;
         let currentVersion = ''; // To track which version is being purchased
 
-        // This function is called when the PayPal SDK script has finished loading
-        function onPayPalSdkLoaded() {
-            isPayPalSdkReady = true;
-            console.log("PayPal SDK loaded successfully.");
-            // If the modal was already open and waiting, try rendering buttons now
-            if (!purchaseModal.classList.contains('hidden') && currentVersion) {
-                renderPayPalButtons(currentVersion);
+        // This function will be called once the window and all its resources (including PayPal SDK) are loaded.
+        window.onload = function() {
+            isPayPalSdkReady = (typeof paypal !== 'undefined');
+            if (isPayPalSdkReady) {
+                console.log("PayPal SDK confirmed loaded via window.onload.");
+            } else {
+                console.error("PayPal SDK NOT loaded by window.onload. Check network or script tag.");
             }
-        }
+        };
 
         // Function to scroll smoothly to a section
         function scrollToSection(id) {
@@ -323,8 +332,10 @@
                 renderPayPalButtons(version);
             } else {
                 modalTitle.textContent = 'Loading Payment System...';
-                modalMessage.textContent = 'Please wait while we prepare the payment options.';
-                // The onPayPalSdkLoaded function will try to render buttons once ready
+                modalMessage.textContent = 'Please wait while we prepare the payment options. If this message persists, please refresh the page.';
+                console.warn("PayPal SDK not yet ready when showPurchaseModal was called. Waiting for window.onload.");
+                // We're relying on window.onload to set isPayPalSdkReady and then the user might need to click again,
+                // or we could add a polling mechanism here, but for simplicity, let's assume window.onload is sufficient.
             }
         }
 
@@ -347,9 +358,9 @@
             // Clear any existing buttons to prevent duplicates on re-open
             paypalButtonContainer.innerHTML = ''; 
 
-            // Double check if the PayPal SDK is loaded (should be true due to onload, but good for safety)
+            // Double check if the PayPal SDK is loaded (should be true due to window.onload)
             if (typeof paypal === 'undefined') {
-                console.error("PayPal SDK still not loaded after expected ready state. This is unexpected.");
+                console.error("PayPal SDK still not loaded. Cannot render buttons. This is a critical error.");
                 modalTitle.textContent = 'Payment Unavailable';
                 modalMessage.textContent = 'Payment system is not ready. Please try refreshing the page or check your internet connection.';
                 purchaseModal.classList.remove('hidden');
@@ -445,15 +456,5 @@
             }
         }
     </script>
-
-    <!-- PayPal JavaScript SDK -->
-    <script 
-        src="https://www.paypal.com/sdk/js?client-id=AbFAFD99aa0hCnoggRAkKPvSg7i-FBwF1jQvHIqRwIxhgN4nh6fXk_-hxClQj0hCgvbH7m8vT6d2sPHi&currency=USD"
-        data-client-metadata-id="algotbp-website-client"
-        data-namespace="paypal_sdk"
-        data-page-type="home"
-        data-sdk-integration-source="integrationbuilder"
-        onload="onPayPalSdkLoaded()"
-    ></script>
 </body>
 </html>
