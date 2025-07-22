@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TradeBotPro - Automate Your Trading</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
@@ -110,10 +109,8 @@
 </head>
 <body class="antialiased">
 
-    <!-- Header -->
     <header class="bg-gray-900 shadow-lg py-4 px-6 flex justify-between items-center fixed w-full z-50">
         <div class="flex items-center space-x-3">
-            <!-- Simple Bot Icon (SVG) -->
             <svg class="w-8 h-8 text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l3 3a1 1 0 001.414-1.414L11 9.586V6z" clip-rule="evenodd"></path>
             </svg>
@@ -127,7 +124,6 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="relative h-screen flex items-center justify-center text-center text-white overflow-hidden gradient-bg">
         <div class="absolute inset-0 bg-black opacity-50"></div>
         <div class="relative z-10 p-8 max-w-4xl mx-auto">
@@ -148,322 +144,440 @@
         </div>
     </section>
 
-    <!-- Features Section -->
     <section id="features" class="py-16 px-6 bg-gray-900">
         <h2 class="text-4xl font-bold text-center mb-12 text-white">Why Choose TradeBotPro?</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             
-            <!-- Feature 1: Advanced AI Decision-Making -->
             <div class="feature-card p-6 rounded-lg shadow-xl flex flex-col items-center text-center">
                 <svg class="w-16 h-16 text-blue-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 013 14v3a1 1 0 001 1h12a1 1 0 001-1v-3a1 1 0 01-.293-.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 110-6 3 3 0 010 6z"></path></svg>
                 <h3 class="text-2xl font-semibold mb-3 text-green-300">Advanced AI Decision-Making</h3>
                 <p class="text-gray-400 mb-4">Leveraging cutting-edge algorithms and technical indicators (RSI, MACD) for precise trade entry and exit points.</p>
-                <p class="text-green-200 font-medium italic">
-                    Profit Example: "Imagine identifying a momentum breakout in TSLA, entering at $180, and exiting at $185 for a swift <span class="text-green-400 font-bold">$500 profit</span> on a single day trade."
-                </p>
+                <p class="text-green-200 font-medium italic"> Profit Example: "Imagine identifying a momentum breakout in TSLA, entering at $180, and exiting at $185 for a swift <span class="text-green-400 font-bold">$500 profit</span> on a single day trade." </p>
             </div>
-
-            <!-- Feature 2: Fractional Share Trading -->
             <div class="feature-card p-6 rounded-lg shadow-xl flex flex-col items-center text-center">
                 <svg class="w-16 h-16 text-purple-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
                 <h3 class="text-2xl font-semibold mb-3 text-green-300">Fractional Share Trading</h3>
                 <p class="text-gray-400 mb-4">Maximize every dollar. Invest in high-value stocks like NVDA or GOOG with as little as $1, ensuring no capital sits idle.</p>
-                <p class="text-green-200 font-medium italic">
-                    Profit Example: "Even with just $25, TradeBotPro can buy 0.02 shares of a $1200 stock, turning a 5% gain into a <span class="text-green-400 font-bold">$1.25 profit</span> that compounds over time."
-                </p>
+                <p class="text-green-200 font-medium italic"> Profit Example: "Even with just $25, TradeBotPro can buy 0.02 shares of a $1200 stock, turning a 5% gain into a <span class="text-green-400 font-bold">$1.25 profit</span> that compounds over time." </p>
             </div>
-
-            <!-- Feature 3: Experimental Options Trading -->
             <div class="feature-card p-6 rounded-lg shadow-xl flex flex-col items-center text-center">
-                <svg class="w-16 h-16 text-yellow-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17.555 1.683a1 1 0 00-1.912-.087l-2.007 4.125a3 3 0 00-1.07 1.07L.707 15.293A1 1 0 001.414 16l4.01-4.01a1 1 0 001.07-1.07l4.125-2.007a1 1 0 00-.087-1.912l-4.125-2.007a3 3 0 00-1.07-1.07L3.707 2.707A1 1 0 002.99 2.99l4.01 4.01a1 1 0 001.07 1.07l4.125 2.007a1 1 0 00.087 1.912l2.007-4.125a3 3 0 001.07-1.07l4.01-4.01A1 1 0 0017.555 1.683z"></path></svg>
+                <svg class="w-16 h-16 text-red-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-7-9a1 1 0 000 2h14a1 1 0 100-2H3z" clip-rule="evenodd"></path></svg>
                 <h3 class="text-2xl font-semibold mb-3 text-green-300">Experimental Options Trading</h3>
-                <p class="text-gray-400 mb-4">Explore amplified returns with our new, experimental options module. Buy Calls or Puts based on market direction.</p>
-                <p class="text-green-200 font-medium italic">
-                    Profit Example: "A correctly predicted bullish move on SPY could turn a $35 option premium into <span class="text-green-400 font-bold">$105 profit</span> in days, a 300% gain! (High risk, high reward)."
-                </p>
+                <p class="text-gray-400 mb-4">Explore high-leverage opportunities. Our bot includes an experimental module for simplified options trading (Pro Version Only).</p>
+                <p class="text-green-200 font-medium italic"> Risk/Reward Example: "A small options contract investment of $50, if successful, could yield a <span class="text-green-400 font-bold">$500 profit</span>. High risk, high reward." </p>
+            </div>
+             <div class="feature-card p-6 rounded-lg shadow-xl flex flex-col items-center text-center">
+                <svg class="w-16 h-16 text-green-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 11a1 1 0 011-1h14a1 1 0 011 1v1a1 1 0 01-1 1H3a1 1 0 01-1-1v-1zm1-4a1 1 0 011-1h14a1 1 0 011 1v1a1 1 0 01-1 1H3a1 1 0 01-1-1V7zm1-4a1 1 0 011-1h14a1 1 0 011 1v1a1 1 0 01-1 1H4a1 1 0 01-1-1V3z"></path></svg>
+                <h3 class="text-2xl font-semibold mb-3 text-green-300">Comprehensive Portfolio Management</h3>
+                <p class="text-gray-400 mb-4">TradeBotPro not only executes trades but also monitors your portfolio, rebalancing as needed to maintain your desired risk profile and optimize returns.</p>
+                <p class="text-green-200 font-medium italic"> Benefit: "By automatically rebalancing, a diversified portfolio that started at $10,000 could avoid significant drawdowns and potentially generate an additional <span class="text-green-400 font-bold">$1,000 annually</span> compared to a static approach." </p>
             </div>
 
-            <!-- Feature 4: Robust Persistent State & Auto-Restart -->
             <div class="feature-card p-6 rounded-lg shadow-xl flex flex-col items-center text-center">
-                <svg class="w-16 h-16 text-red-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3 1h10v8H5V6zm1-2a1 1 0 00-1 1v1a1 1 0 102 0V5a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                <h3 class="text-2xl font-semibold mb-3 text-green-300">Persistent State & Auto-Restart</h3>
-                <p class="text-gray-400 mb-4">Never lose your progress. The bot remembers all trades, P/L, and automatically resumes trading after market close.</p>
-                <p class="text-green-200 font-medium italic">
-                    Benefit: "Seamless operation ensures you're always ready for the next market open, without manual intervention."
-                </p>
+                <svg class="w-16 h-16 text-yellow-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zM2 10a8 8 0 018-8v8H2z" clip-rule="evenodd"></path></svg>
+                <h3 class="text-2xl font-semibold mb-3 text-green-300">Real-time Market Data & Alerts</h3>
+                <p class="text-gray-400 mb-4">Stay ahead with lightning-fast market data feeds. Receive instant alerts on significant price movements, news, and trading opportunities directly to your preferred device.</p>
+                <p class="text-green-200 font-medium italic"> Advantage: "Getting an alert on a sudden 3% price drop in your watched stock allows for immediate protective action, potentially saving <span class="text-green-400 font-bold">$300 on a $10,000 position</span> from further losses." </p>
             </div>
 
-            <!-- Feature 5: Real-time Reconciliation -->
             <div class="feature-card p-6 rounded-lg shadow-xl flex flex-col items-center text-center">
-                <svg class="w-16 h-16 text-teal-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                <h3 class="text-2xl font-semibold mb-3 text-green-300">Real-time Reconciliation</h3>
-                <p class="text-gray-400 mb-4">Your P/L is always accurate. The bot verifies its state against your live brokerage, even after manual trades or cancellations.</p>
-                <p class="text-green-200 font-medium italic">
-                    Benefit: "Complete transparency and peace of mind, knowing your performance metrics are always correct."
-                </p>
+                <svg class="w-16 h-16 text-cyan-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 013 14v3a1 1 0 001 1h12a1 1 0 001-1v-3a1 1 0 01-.293-.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 110-6 3 3 0 010 6z"></path></svg>
+                <h3 class="text-2xl font-semibold mb-3 text-green-300">Customizable Strategies & Backtesting</h3>
+                <p class="text-gray-400 mb-4">Tailor the bot's behavior to your unique trading style. Design and backtest custom strategies against historical data to validate profitability before risking real capital.</p>
+                <p class="text-green-200 font-medium italic"> Optimization: "Backtesting a new strategy on 5 years of historical data reveals it would have generated a <span class="text-green-400 font-bold">25% annual return</span>, giving you confidence to deploy it with real money." </p>
             </div>
-
-            <!-- Feature 6: Comprehensive Risk Management -->
-            <div class="feature-card p-6 rounded-lg shadow-xl flex flex-col items-center text-center">
-                <svg class="w-16 h-16 text-orange-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                <h3 class="text-2xl font-semibold mb-3 text-green-300">Comprehensive Risk Management</h3>
-                <p class="text-gray-400 mb-4">Built-in daily profit targets, stop-loss limits, and concurrent trade limits protect your capital.</p>
-                <p class="text-green-200 font-medium italic">
-                    Benefit: "Trade with confidence, knowing your downside is managed automatically."
-                </p>
-            </div>
-
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-16 px-6 bg-gray-800">
-        <h2 class="text-4xl font-bold text-center mb-12 text-white">Choose Your Trading Power</h2>
-        <div class="flex flex-col md:flex-row justify-center items-stretch gap-8 max-w-5xl mx-auto">
+    <section id="pricing" class="py-16 px-6 bg-gray-800 text-white">
+        <h2 class="text-4xl font-bold text-center mb-12 text-white">Our Pricing Plans</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             
-            <!-- Lite Version Card -->
-            <div class="flex-1 feature-card p-8 rounded-lg shadow-2xl flex flex-col items-center text-center transform hover:scale-105 transition-transform duration-300">
-                <h3 class="text-3xl font-bold text-blue-400 mb-4">Lite Version</h3>
-                <p class="text-5xl font-extrabold text-white mb-6">$49.99</p>
-                <ul class="text-gray-300 text-lg space-y-3 mb-8 text-left w-full">
-                    <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Lifetime Access</li>
-                    <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Basic Features (No Options)</li>
-                    <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Direct Download</li>
-                    <li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Options Trading</li>
-                    <li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Persistent State</li>
-                    <li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Reconciliation</li>
-                    <li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Account-Level Risk Management</li>
-                </ul>
-                <button onclick="showPurchaseModal('lite')" class="btn-secondary text-xl font-semibold py-3 px-10 rounded-lg shadow-lg w-full">
-                    Get Now for $49.99
-                </button>
+            <div class="bg-gray-700 p-8 rounded-lg shadow-xl text-center flex flex-col justify-between">
+                <div>
+                    <h3 class="text-3xl font-bold text-green-300 mb-4">TradeBotPro Lite</h3>
+                    <p class="text-5xl font-extrabold mb-6">$49.99 <span class="text-xl font-normal text-gray-400">/ one-time</span></p>
+                    <ul class="text-left text-gray-300 space-y-3 mb-8">
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Basic AI-driven Trading</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Stocks Only</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Standard Support</li>
+                        <li class="flex items-center text-gray-500"><svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd" transform="rotate(45 10 10)"></path></svg>No Options Trading</li>
+                        <li class="flex items-center text-gray-500"><svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd" transform="rotate(45 10 10)"></path></svg>No Advanced Backtesting</li>
+                    </ul>
+                </div>
+                <div id="paypal-button-container-lite" class="mt-6"></div>
             </div>
-
-            <!-- Pro Version Card -->
-            <div class="flex-1 feature-card p-8 rounded-lg shadow-2xl flex flex-col items-center text-center transform hover:scale-105 transition-transform duration-300">
-                <h3 class="text-3xl font-bold text-green-400 mb-4">Pro Version</h3>
-                <p class="text-5xl font-extrabold text-white mb-6">$199.99</p>
-                <ul class="text-gray-300 text-lg space-y-3 mb-8 text-left w-full">
-                    <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Lifetime Access</li>
-                    <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> All Features (Including Options)</li>
-                    <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Unique License Key</li>
-                    <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Immediate Download</li>
-                </ul>
-                <button onclick="showPurchaseModal('full')" class="btn-primary text-xl font-semibold py-3 px-10 rounded-lg shadow-lg w-full">
-                    Buy Now for $199.99
-                </button>
+            
+            <div class="bg-gradient-to-r from-green-500 to-green-700 p-8 rounded-lg shadow-xl text-center flex flex-col justify-between transform scale-105">
+                <div>
+                    <h3 class="text-3xl font-bold text-white mb-4">TradeBotPro Pro</h3>
+                    <p class="text-5xl font-extrabold mb-6">$199.99 <span class="text-xl font-normal text-gray-200">/ one-time</span></p>
+                    <ul class="text-left text-green-100 space-y-3 mb-8">
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Advanced AI & Fractional Shares</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Stocks & Experimental Options</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 0 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Premium 24/7 Support</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Advanced Backtesting & Optimization</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Exclusive Updates</li>
+                    </ul>
+                </div>
+                <div id="paypal-button-container-pro" class="mt-6"></div>
             </div>
-
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 py-8 text-center text-gray-500 text-sm">
-        <p>&copy; 2025 TradeBotPro. All rights reserved. Trading involves substantial risk.</p>
+    <section class="py-16 px-6 bg-gray-900 text-white">
+        <h2 class="text-4xl font-bold text-center mb-12 text-white">Compare Versions</h2>
+        <div class="max-w-4xl mx-auto overflow-x-auto">
+            <table class="w-full comparison-table text-lg rounded-lg overflow-hidden">
+                <thead>
+                    <tr>
+                        <th class="w-1/3">Feature</th>
+                        <th class="w-1/3">TradeBotPro Lite</th>
+                        <th class="w-1/3">TradeBotPro Pro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>AI-driven Trading</td>
+                        <td><span class="check-icon">&#10003;</span> Basic</td>
+                        <td><span class="check-icon">&#10003;</span> Advanced</td>
+                    </tr>
+                    <tr>
+                        <td>Stocks Trading</td>
+                        <td><span class="check-icon">&#10003;</span> Yes</td>
+                        <td><span class="check-icon">&#10003;</span> Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Fractional Share Trading</td>
+                        <td><span class="check-icon">&#10003;</span> Yes</td>
+                        <td><span class="check-icon">&#10003;</span> Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Experimental Options Trading</td>
+                        <td><span class="cross-icon">&#10006;</span> No</td>
+                        <td><span class="check-icon">&#10003;</span> Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Portfolio Management</td>
+                        <td><span class="check-icon">&#10003;</span> Basic Tracking</td>
+                        <td><span class="check-icon">&#10003;</span> Comprehensive</td>
+                    </tr>
+                    <tr>
+                        <td>Real-time Market Data</td>
+                        <td><span class="check-icon">&#10003;</span> Yes</td>
+                        <td><span class="check-icon">&#10003;</span> Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Customizable Strategies</td>
+                        <td><span class="cross-icon">&#10006;</span> No</td>
+                        <td><span class="check-icon">&#10003;</span> Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Advanced Backtesting</td>
+                        <td><span class="cross-icon">&#10006;</span> No</td>
+                        <td><span class="check-icon">&#10003;</span> Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Priority Support</td>
+                        <td><span class="cross-icon">&#10006;</span> Standard</td>
+                        <td><span class="check-icon">&#10003;</span> Premium 24/7</td>
+                    </tr>
+                    <tr>
+                        <td>Exclusive Updates</td>
+                        <td><span class="cross-icon">&#10006;</span> No</td>
+                        <td><span class="check-icon">&#10003;</span> Yes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="py-16 px-6 bg-gray-700 text-white text-center">
+        <h2 class="text-4xl font-bold mb-6">Ready to Automate Your Trading?</h2>
+        <p class="text-xl mb-8">Join thousands of traders who are maximizing their potential with TradeBotPro.</p>
+        <button onclick="scrollToSection('pricing')" class="btn-primary text-lg md:text-xl font-semibold py-3 px-8 rounded-lg shadow-lg">
+            Choose Your Plan
+        </button>
+    </section>
+
+    <footer class="bg-gray-900 py-8 px-6 text-center text-gray-400">
+        <p>&copy; 2023 TradeBotPro. All rights reserved.</p>
+        <p class="mt-2 text-sm">
+            <a href="/privacy" class="hover:text-white">Privacy Policy</a> | 
+            <a href="/terms" class="hover:text-white">Terms of Service</a>
+        </p>
     </footer>
 
-    <!-- Purchase Confirmation Modal -->
     <div id="purchaseModal" class="modal hidden">
-        <div class="modal-content">
+        <div class="modal-content text-white">
             <span class="close-button" onclick="closeModal()">&times;</span>
-            <h3 id="modalTitle" class="text-2xl font-bold text-white mb-4"></h3>
-            <p id="modalMessage" class="text-gray-300 mb-6"></p>
-            
-            <!-- PayPal button container -->
-            <div id="paypal-button-container"></div>
-
+            <h3 id="modalTitle" class="text-2xl font-bold mb-4 text-center">Processing Your Order...</h3>
+            <p id="modalMessage" class="text-center text-lg">Please wait while we process your payment and generate your license.</p>
+            <div id="loadingSpinner" class="flex justify-center mt-6">
+                <svg class="animate-spin -ml-1 mr-3 h-10 w-10 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </div>
+            <div id="modalContentDetails" class="mt-6 text-left hidden">
+                <p><strong>Download Link:</strong> <a id="downloadLink" href="#" class="text-green-400 hover:underline" target="_blank"></a></p>
+                <p><strong>License Key:</strong> <span id="licenseKey" class="font-bold text-yellow-400 break-all"></span></p>
+                <p class="mt-4 text-sm text-gray-400">Please save your license key and download the software. The download link is valid for a limited time.</p>
+            </div>
+            <div class="flex justify-center mt-6">
+                <button id="closeModalButton" onclick="closeModal()" class="btn-primary py-2 px-6 rounded-lg hidden">Close</button>
+            </div>
         </div>
     </div>
 
-    <!-- PayPal JavaScript SDK -->
-    <script 
-        src="https://www.paypal.com/sdk/js?client-id=AbFAFD99aa0hCnoggRAkKPvSg7i-FBwF1jQvHIqRwIxhgN4nh6fXk_-hxClQj0hCgvbH7m8vT6d2sPHi&currency=USD"
-        data-client-metadata-id="algotbp-website-client"
-        data-namespace="paypal_sdk"
-        data-page-type="home"
-        data-sdk-integration-source="integrationbuilder">
-    </script>
-
     <script>
-        // IMPORTANT: Replace with your actual deployed Google Cloud Run URL
-        const BACKEND_BASE_URL = "https://tradebotpro-backend-553116950013.us-central1.run.app"; // Your Cloud Run Service URL
+        // Smooth scrolling for navigation
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
 
-        const paypalButtonContainer = document.getElementById('paypal-button-container');
+        // Modal functionality
+        const purchaseModal = document.getElementById('purchaseModal');
         const modalTitle = document.getElementById('modalTitle');
         const modalMessage = document.getElementById('modalMessage');
-        const purchaseModal = document.getElementById('purchaseModal');
-        let currentVersion = '';
-        let paypalLoadAttempts = 0;
-        const MAX_PAYPAL_LOAD_ATTEMPTS = 20; // 20 attempts * 200ms interval = 4 seconds total wait
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const modalContentDetails = document.getElementById('modalContentDetails');
+        const downloadLinkElem = document.getElementById('downloadLink');
+        const licenseKeyElem = document.getElementById('licenseKey');
+        const closeModalButton = document.getElementById('closeModalButton');
 
-        // Function to scroll smoothly to a section
-        function scrollToSection(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // --- Modal Logic ---
-        function showPurchaseModal(version) {
-            currentVersion = version;
-            paypalLoadAttempts = 0; // Reset attempts for new modal open
-
-            if (version === 'full') {
-                modalTitle.textContent = 'Purchase TradeBotPro Pro Version';
-                modalMessage.textContent = 'To complete your purchase, proceed with payment. Your unique license key and download link will be sent to your email address after successful payment.';
-            } else { // lite version
-                modalTitle.textContent = 'Purchase TradeBotPro Lite Version';
-                modalMessage.textContent = 'To complete your purchase, proceed with payment. Your download link will be available after successful payment.';
+        function openModal(title, message, showSpinner = true, showDetails = false) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            if (showSpinner) {
+                loadingSpinner.classList.remove('hidden');
+            } else {
+                loadingSpinner.classList.add('hidden');
+            }
+            if (showDetails) {
+                modalContentDetails.classList.remove('hidden');
+                closeModalButton.classList.remove('hidden');
+            } else {
+                modalContentDetails.classList.add('hidden');
+                closeModalButton.classList.add('hidden');
             }
             purchaseModal.classList.remove('hidden');
-
-            // Initial loading state
-            modalTitle.textContent = 'Loading Payment System...';
-            modalMessage.textContent = 'Please wait while we prepare the payment options. This should only take a moment.';
-            paypalButtonContainer.innerHTML = ''; // Clear previous buttons
-
-            // Start the polling for PayPal SDK readiness
-            pollForPayPalSdk(version);
-        }
-
-        function pollForPayPalSdk(version) {
-            if (typeof paypal !== 'undefined') {
-                console.log("PayPal SDK confirmed loaded via polling.");
-                // Restore original modal title/message
-                if (version === 'full') {
-                    modalTitle.textContent = 'Purchase TradeBotPro Pro Version';
-                    modalMessage.textContent = 'To complete your purchase, proceed with payment. Your unique license key and download link will be sent to your email address after successful payment.';
-                } else {
-                    modalTitle.textContent = 'Purchase TradeBotPro Lite Version';
-                    modalMessage.textContent = 'To complete your purchase, proceed with payment. Your download link will be available after successful payment.';
-                }
-                renderPayPalButtons(version);
-            } else if (paypalLoadAttempts < MAX_PAYPAL_LOAD_ATTEMPTS) {
-                paypalLoadAttempts++;
-                console.warn(`PayPal SDK not yet ready. Still polling... Attempt ${paypalLoadAttempts}/${MAX_PAYPAL_LOAD_ATTEMPTS}`);
-                setTimeout(() => pollForPayPalSdk(version), 200); // Poll every 200ms
-            } else {
-                console.error("PayPal SDK failed to load after multiple attempts.");
-                modalTitle.textContent = 'Payment System Unavailable';
-                modalMessage.textContent = 'We are unable to load the payment system. Please check your internet connection, disable any ad-blockers, or try refreshing the page.';
-                paypalButtonContainer.innerHTML = ''; // Ensure no buttons are shown
-            }
+            purchaseModal.classList.add('flex'); // Ensure flex is applied for centering
         }
 
         function closeModal() {
             purchaseModal.classList.add('hidden');
-            // Clear PayPal buttons when modal is closed
-            paypalButtonContainer.innerHTML = '';
-            // Note: No need to clear interval here, as pollForPayPalSdk uses setTimeout, not setInterval
+            purchaseModal.classList.remove('flex');
+            // Reset modal content
+            modalTitle.textContent = 'Processing Your Order...';
+            modalMessage.textContent = 'Please wait while we process your payment and generate your license.';
+            loadingSpinner.classList.remove('hidden');
+            modalContentDetails.classList.add('hidden');
+            closeModalButton.classList.add('hidden');
+            downloadLinkElem.href = '#';
+            downloadLinkElem.textContent = '';
+            licenseKeyElem.textContent = '';
         }
 
-        // Close modal if clicked outside content
-        window.onclick = function(event) {
-            if (event.target == purchaseModal) {
-                closeModal();
-            }
-        }
+        // --- IMPORTANT: CONFIGURE YOUR BACKEND URL AND PAYPAL CLIENT ID HERE ---
+        // Get your Cloud Run URL from your Google Cloud Console.
+        // It should look something like: https://YOUR_SERVICE_NAME-YOUR_PROJECT_HASH.REGION.run.app
+        const BACKEND_BASE_URL = 'https://tradebotpro-backend-553116950013.us-central1.run.app'; // <--- UPDATED TO HTTPS
+        const PAYPAL_CLIENT_ID = 'AbFAFD99aa0hCnoggRAkKPvSg7i-FBwF1jQvHIqRwIxhgN4nh6fXk_-hxClQj0hCgvbH7m8vT6d2sPHi'; // From tradebotprokeys and info.txt
 
-        // Function to render PayPal buttons
-        function renderPayPalButtons(version) {
-            // Clear any existing buttons to prevent duplicates on re-open
-            paypalButtonContainer.innerHTML = ''; 
+        // Load PayPal SDK script dynamically (already present in your HTML, just ensure client-id is correct)
+        // This line is already in your HTML head:
+        // <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID_HERE&currency=USD"></script>
+        // Make sure YOUR_PAYPAL_CLIENT_ID_HERE is replaced with the actual ID above.
 
-            // Final check if the PayPal SDK is loaded (should be true if called from polling)
-            if (typeof paypal === 'undefined') {
-                console.error("PayPal SDK is still undefined. Cannot render buttons. This is a critical error.");
-                modalTitle.textContent = 'Payment Unavailable';
-                modalMessage.textContent = 'Payment system is not ready. Please try refreshing the page or check your internet connection.';
-                purchaseModal.classList.remove('hidden');
-                return;
-            }
-
+        // Function to initialize PayPal buttons
+        function initPayPalButtons() {
             try {
+                // Render the Lite Version PayPal button
                 paypal.Buttons({
-                    // Set up the transaction
+                    style: {
+                        layout: 'vertical',
+                        color: 'blue',
+                        shape: 'rect',
+                        label: 'paypal'
+                    },
                     createOrder: function(data, actions) {
-                        // Call your backend to create the PayPal order
+                        openModal('Initiating Payment...', 'Preparing your Lite Version order...');
                         return fetch(`${BACKEND_BASE_URL}/api/create-paypal-order`, {
-                            method: 'post',
+                            method: 'POST',
                             headers: {
-                                'content-type': 'application/json'
+                                'Content-Type': 'application/json'
                             },
-                            body: JSON.stringify({
-                                product: version // 'lite' or 'pro'
-                            })
-                        }).then(function(res) {
-                            if (!res.ok) {
-                                return res.json().then(error => Promise.reject(error));
+                            body: JSON.stringify({ product: 'lite' }) // Indicate product type
+                        }).then(function(response) {
+                            if (!response.ok) {
+                                return response.json().then(errorData => {
+                                    console.error('Backend error creating Lite order:', errorData);
+                                    throw new Error(errorData.error || 'Failed to create PayPal order on backend.');
+                                });
                             }
-                            return res.json();
-                        }).then(function(orderData) {
-                            return orderData.orderID; // Return the order ID from your backend
+                            return response.json();
+                        }).then(function(order) {
+                            return order.orderID;
                         }).catch(function(error) {
-                            console.error('Error creating PayPal order:', error);
+                            console.error('Error creating Lite PayPal order:', error);
                             modalTitle.textContent = 'Payment Error';
-                            modalMessage.textContent = 'Could not initiate payment. Please try again later.';
-                            purchaseModal.classList.remove('hidden');
-                            return Promise.reject(error); // Propagate error to PayPal SDK
+                            modalMessage.textContent = 'Could not initiate Lite payment. Please try again.';
+                            closeModalButton.classList.remove('hidden'); // Show close button on error
+                            loadingSpinner.classList.add('hidden'); // Hide spinner
+                            return Promise.reject(error); // Propagate the error to PayPal SDK
                         });
                     },
-
-                    // Finalize the transaction
                     onApprove: function(data, actions) {
-                        // Call your backend to capture the PayPal order
+                        openModal('Processing Payment...', 'Please wait while we confirm your Lite Version payment and generate your license.');
                         return fetch(`${BACKEND_BASE_URL}/api/capture-paypal-order`, {
-                            method: 'post',
+                            method: 'POST',
                             headers: {
-                                'content-type': 'application/json'
+                                'Content-Type': 'application/json'
                             },
-                            body: JSON.stringify({
-                                orderID: data.orderID // The order ID from PayPal
-                            })
-                        }).then(function(res) {
-                            if (!res.ok) {
-                                return res.json().then(error => Promise.reject(error));
+                            body: JSON.stringify({ orderID: data.orderID })
+                        }).then(function(response) {
+                            if (!response.ok) {
+                                return response.json().then(errorData => {
+                                    console.error('Backend error capturing Lite order:', errorData);
+                                    throw new Error(errorData.message || 'Failed to capture PayPal payment on backend.');
+                                });
                             }
-                            return res.json();
-                        }).then(function(captureData) {
-                            // Handle successful capture (e.g., show success message, trigger download)
-                            if (captureData.status === 'success') {
-                                // Store data in sessionStorage and redirect to success.html
-                                sessionStorage.setItem('tradebotpro_download_url', captureData.download_url);
-                                sessionStorage.setItem('tradebotpro_license_key', captureData.license_key || ''); // Store empty string if no license
-                                sessionStorage.setItem('tradebotpro_product_type', currentVersion); // Store the product type
-                                window.location.href = 'success.html'; // Redirect to the new success page
-                                closeModal(); // Close modal, as we are redirecting
-                            } else {
-                                modalTitle.textContent = 'Payment Failed';
-                                modalMessage.textContent = 'Payment failed: ' + (captureData.message || 'Unknown error.');
-                                purchaseModal.classList.remove('hidden');
-                            }
+                            return response.json();
+                        }).then(function(details) {
+                            console.log('Lite payment captured successfully:', details);
+                            modalTitle.textContent = 'Purchase Complete!';
+                            modalMessage.textContent = 'Thank you for your Lite Version purchase!';
+                            loadingSpinner.classList.add('hidden');
+                            modalContentDetails.classList.remove('hidden');
+                            downloadLinkElem.href = details.download_url;
+                            downloadLinkElem.textContent = 'Download TradeBotPro Lite';
+                            licenseKeyElem.textContent = details.license_key || 'N/A';
+                            closeModalButton.classList.remove('hidden'); // Show close button after success
+
+                            // Optional: Redirect to success page or show a success message
+                            // window.location.href = 'success.html'; 
                         }).catch(function(error) {
-                            console.error('Error capturing PayPal order:', error);
+                            console.error('Error capturing Lite PayPal order:', error);
                             modalTitle.textContent = 'Payment Error';
-                            modalMessage.textContent = 'An error occurred during payment capture. Please try again.';
-                            purchaseModal.classList.remove('hidden');
+                            modalMessage.textContent = 'An error occurred during payment capture for Lite Version. Please try again.';
+                            closeModalButton.classList.remove('hidden'); // Show close button on error
+                            loadingSpinner.classList.add('hidden'); // Hide spinner
                         });
                     },
-
-                    // Handle payment cancellation
                     onCancel: function(data) {
-                        window.location.href = 'cancel.html'; // Redirect to the cancel page
-                        closeModal();
+                        console.log('Lite payment cancelled:', data);
+                        // Optional: Redirect to a cancel page or show a message
+                        closeModal(); // Close the modal on cancel
+                        // window.location.href = 'cancel.html';
                     },
-
-                    // Handle errors
                     onError: function(err) {
-                        console.error('PayPal button error:', err);
+                        console.error('Lite PayPal button error:', err);
                         modalTitle.textContent = 'PayPal Error';
-                        modalMessage.textContent = 'An error occurred during the PayPal payment process. Please try again.';
-                        purchaseModal.classList.remove('hidden');
+                        modalMessage.textContent = 'An error occurred during the Lite PayPal payment process. Please try again.';
+                        closeModalButton.classList.remove('hidden'); // Show close button on error
+                        loadingSpinner.classList.add('hidden'); // Hide spinner
                     }
-                }).render('#paypal-button-container'); // Render the buttons into the container
+                }).render('#paypal-button-container-lite');
+
+                // Render the Pro Version PayPal button
+                paypal.Buttons({
+                    style: {
+                        layout: 'vertical',
+                        color: 'gold', // Gold for Pro version
+                        shape: 'rect',
+                        label: 'paypal'
+                    },
+                    createOrder: function(data, actions) {
+                        openModal('Initiating Payment...', 'Preparing your Pro Version order...');
+                        return fetch(`${BACKEND_BASE_URL}/api/create-paypal-order`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ product: 'full' }) // Indicate product type
+                        }).then(function(response) {
+                            if (!response.ok) {
+                                return response.json().then(errorData => {
+                                    console.error('Backend error creating Pro order:', errorData);
+                                    throw new Error(errorData.error || 'Failed to create PayPal order on backend.');
+                                });
+                            }
+                            return response.json();
+                        }).then(function(order) {
+                            return order.orderID;
+                        }).catch(function(error) {
+                            console.error('Error creating Pro PayPal order:', error);
+                            modalTitle.textContent = 'Payment Error';
+                            modalMessage.textContent = 'Could not initiate Pro payment. Please try again.';
+                            closeModalButton.classList.remove('hidden'); // Show close button on error
+                            loadingSpinner.classList.add('hidden'); // Hide spinner
+                            return Promise.reject(error); // Propagate the error to PayPal SDK
+                        });
+                    },
+                    onApprove: function(data, actions) {
+                        openModal('Processing Payment...', 'Please wait while we confirm your Pro Version payment and generate your license.');
+                        return fetch(`${BACKEND_BASE_URL}/api/capture-paypal-order`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ orderID: data.orderID })
+                        }).then(function(response) {
+                            if (!response.ok) {
+                                return response.json().then(errorData => {
+                                    console.error('Backend error capturing Pro order:', errorData);
+                                    throw new Error(errorData.message || 'Failed to capture PayPal payment on backend.');
+                                });
+                            }
+                            return response.json();
+                        }).then(function(details) {
+                            console.log('Pro payment captured successfully:', details);
+                            modalTitle.textContent = 'Purchase Complete!';
+                            modalMessage.textContent = 'Thank you for your Pro Version purchase!';
+                            loadingSpinner.classList.add('hidden');
+                            modalContentDetails.classList.remove('hidden');
+                            downloadLinkElem.href = details.download_url;
+                            downloadLinkElem.textContent = 'Download TradeBotPro Pro';
+                            licenseKeyElem.textContent = details.license_key || 'N/A';
+                            closeModalButton.classList.remove('hidden'); // Show close button after success
+
+                            // Optional: Redirect to success page or show a success message
+                            // window.location.href = 'success.html';
+                        }).catch(function(error) {
+                            console.error('Error capturing Pro PayPal order:', error);
+                            modalTitle.textContent = 'Payment Error';
+                            modalMessage.textContent = 'An error occurred during payment capture for Pro Version. Please try again.';
+                            closeModalButton.classList.remove('hidden'); // Show close button on error
+                            loadingSpinner.classList.add('hidden'); // Hide spinner
+                        });
+                    },
+                    onCancel: function(data) {
+                        console.log('Pro payment cancelled:', data);
+                        closeModal(); // Close the modal on cancel
+                        // window.location.href = 'cancel.html';
+                    },
+                    onError: function(err) {
+                        console.error('Pro PayPal button error:', err);
+                        modalTitle.textContent = 'PayPal Error';
+                        modalMessage.textContent = 'An error occurred during the Pro PayPal payment process. Please try again.';
+                        closeModalButton.classList.remove('hidden'); // Show close button on error
+                        loadingSpinner.classList.add('hidden'); // Hide spinner
+                    }
+                }).render('#paypal-button-container-pro');
             } catch (e) {
                 console.error("Error rendering PayPal buttons:", e);
                 modalTitle.textContent = 'Payment System Error';
                 modalMessage.textContent = 'There was an unexpected error initializing the payment buttons. Please try again later.';
                 purchaseModal.classList.remove('hidden');
+                purchaseModal.classList.add('flex');
             }
         }
+
+        // Initialize PayPal buttons when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', initPayPalButtons);
     </script>
 </body>
 </html>
