@@ -288,8 +288,13 @@
         // IMPORTANT: Replace with your actual deployed Google Cloud Run URL
         const BACKEND_BASE_URL = "https://tradebotpro-backend-553116950013.us-central1.run.app"; // Your Cloud Run Service URL
 
-        let paypalLoadInterval = null;
-        let currentVersion = ''; // To track which version is being purchased
+        const paypalButtonContainer = document.getElementById('paypal-button-container');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMessage = document.getElementById('modalMessage');
+        const purchaseModal = document.getElementById('purchaseModal');
+        let currentVersion = '';
+        let paypalLoadAttempts = 0;
+        const MAX_PAYPAL_LOAD_ATTEMPTS = 20; // 20 attempts * 200ms interval = 4 seconds total wait
 
         // Function to scroll smoothly to a section
         function scrollToSection(id) {
@@ -297,14 +302,10 @@
         }
 
         // --- Modal Logic ---
-        const purchaseModal = document.getElementById('purchaseModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalMessage = document.getElementById('modalMessage');
-        
-
         function showPurchaseModal(version) {
             currentVersion = version;
-            
+            paypalLoadAttempts = 0; // Reset attempts for new modal open
+
             if (version === 'full') {
                 modalTitle.textContent = 'Purchase TradeBotPro Pro Version';
                 modalMessage.textContent = 'To complete your purchase, proceed with payment. Your unique license key and download link will be sent to your email address after successful payment.';
@@ -314,46 +315,44 @@
             }
             purchaseModal.classList.remove('hidden');
 
-            // Show a loading message while waiting for PayPal SDK
+            // Initial loading state
             modalTitle.textContent = 'Loading Payment System...';
             modalMessage.textContent = 'Please wait while we prepare the payment options. This should only take a moment.';
-            document.getElementById('paypal-button-container').innerHTML = ''; // Clear previous buttons
+            paypalButtonContainer.innerHTML = ''; // Clear previous buttons
 
-            // Start polling for PayPal SDK readiness
-            // Clear any existing interval first to prevent duplicates
-            if (paypalLoadInterval) {
-                clearInterval(paypalLoadInterval);
-            }
+            // Start the polling for PayPal SDK readiness
+            pollForPayPalSdk(version);
+        }
 
-            paypalLoadInterval = setInterval(() => {
-                if (typeof paypal !== 'undefined') {
-                    clearInterval(paypalLoadInterval); // Stop polling
-                    paypalLoadInterval = null; // Reset interval ID
-                    console.log("PayPal SDK confirmed loaded via polling.");
-                    // Restore original modal title/message
-                    if (version === 'full') {
-                        modalTitle.textContent = 'Purchase TradeBotPro Pro Version';
-                        modalMessage.textContent = 'To complete your purchase, proceed with payment. Your unique license key and download link will be sent to your email address after successful payment.';
-                    } else {
-                        modalTitle.textContent = 'Purchase TradeBotPro Lite Version';
-                        modalMessage.textContent = 'To complete your purchase, proceed with payment. Your download link will be available after successful payment.';
-                    }
-                    renderPayPalButtons(version); // Render buttons now that SDK is ready
+        function pollForPayPalSdk(version) {
+            if (typeof paypal !== 'undefined') {
+                console.log("PayPal SDK confirmed loaded via polling.");
+                // Restore original modal title/message
+                if (version === 'full') {
+                    modalTitle.textContent = 'Purchase TradeBotPro Pro Version';
+                    modalMessage.textContent = 'To complete your purchase, proceed with payment. Your unique license key and download link will be sent to your email address after successful payment.';
                 } else {
-                    console.warn("PayPal SDK not yet ready. Still polling...");
+                    modalTitle.textContent = 'Purchase TradeBotPro Lite Version';
+                    modalMessage.textContent = 'To complete your purchase, proceed with payment. Your download link will be available after successful payment.';
                 }
-            }, 200); // Check every 200ms
+                renderPayPalButtons(version);
+            } else if (paypalLoadAttempts < MAX_PAYPAL_LOAD_ATTEMPTS) {
+                paypalLoadAttempts++;
+                console.warn(`PayPal SDK not yet ready. Still polling... Attempt ${paypalLoadAttempts}/${MAX_PAYPAL_LOAD_ATTEMPTS}`);
+                setTimeout(() => pollForPayPalSdk(version), 200); // Poll every 200ms
+            } else {
+                console.error("PayPal SDK failed to load after multiple attempts.");
+                modalTitle.textContent = 'Payment System Unavailable';
+                modalMessage.textContent = 'We are unable to load the payment system. Please check your internet connection, disable any ad-blockers, or try refreshing the page.';
+                paypalButtonContainer.innerHTML = ''; // Ensure no buttons are shown
+            }
         }
 
         function closeModal() {
             purchaseModal.classList.add('hidden');
             // Clear PayPal buttons when modal is closed
-            document.getElementById('paypal-button-container').innerHTML = '';
-            // Stop any active polling interval if modal is closed prematurely
-            if (paypalLoadInterval) {
-                clearInterval(paypalLoadInterval);
-                paypalLoadInterval = null;
-            }
+            paypalButtonContainer.innerHTML = '';
+            // Note: No need to clear interval here, as pollForPayPalSdk uses setTimeout, not setInterval
         }
 
         // Close modal if clicked outside content
@@ -365,7 +364,6 @@
 
         // Function to render PayPal buttons
         function renderPayPalButtons(version) {
-            const paypalButtonContainer = document.getElementById('paypal-button-container');
             // Clear any existing buttons to prevent duplicates on re-open
             paypalButtonContainer.innerHTML = ''; 
 
