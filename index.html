@@ -285,24 +285,28 @@
     ></script>
 
     <script>
-        // IMPORTANT: This script block should be placed AFTER the PayPal SDK script
-        // to ensure the 'paypal' object is defined when our code executes.
-
         // IMPORTANT: Replace with your actual deployed Google Cloud Run URL
         const BACKEND_BASE_URL = "https://tradebotpro-backend-553116950013.us-central1.run.app";
 
         let isPayPalSdkReady = false;
         let currentVersion = ''; // To track which version is being purchased
 
-        // This function will be called once the window and all its resources (including PayPal SDK) are loaded.
-        window.onload = function() {
-            isPayPalSdkReady = (typeof paypal !== 'undefined');
-            if (isPayPalSdkReady) {
-                console.log("PayPal SDK confirmed loaded via window.onload.");
-            } else {
-                console.error("PayPal SDK NOT loaded by window.onload. Check network or script tag.");
-            }
-        };
+        // Use DOMContentLoaded to ensure the HTML is parsed, then a small timeout for SDK init
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                isPayPalSdkReady = (typeof paypal !== 'undefined');
+                if (isPayPalSdkReady) {
+                    console.log("PayPal SDK confirmed loaded via DOMContentLoaded + setTimeout.");
+                } else {
+                    console.error("PayPal SDK NOT loaded after DOMContentLoaded + setTimeout. Check network or script tag.");
+                    // Optionally, update modal message to indicate a persistent loading issue
+                    if (!purchaseModal.classList.contains('hidden')) {
+                        modalTitle.textContent = 'Payment Unavailable';
+                        modalMessage.textContent = 'Payment system could not load. Please check your internet connection or try refreshing the page.';
+                    }
+                }
+            }, 500); // Give it 500ms (0.5 seconds) to initialize after DOM is ready
+        });
 
         // Function to scroll smoothly to a section
         function scrollToSection(id) {
@@ -333,9 +337,7 @@
             } else {
                 modalTitle.textContent = 'Loading Payment System...';
                 modalMessage.textContent = 'Please wait while we prepare the payment options. If this message persists, please refresh the page.';
-                console.warn("PayPal SDK not yet ready when showPurchaseModal was called. Waiting for window.onload.");
-                // We're relying on window.onload to set isPayPalSdkReady and then the user might need to click again,
-                // or we could add a polling mechanism here, but for simplicity, let's assume window.onload is sufficient.
+                console.warn("PayPal SDK not yet ready when showPurchaseModal was called. Waiting for SDK to load.");
             }
         }
 
@@ -358,7 +360,7 @@
             // Clear any existing buttons to prevent duplicates on re-open
             paypalButtonContainer.innerHTML = ''; 
 
-            // Double check if the PayPal SDK is loaded (should be true due to window.onload)
+            // Double check if the PayPal SDK is loaded
             if (typeof paypal === 'undefined') {
                 console.error("PayPal SDK still not loaded. Cannot render buttons. This is a critical error.");
                 modalTitle.textContent = 'Payment Unavailable';
