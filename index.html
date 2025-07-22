@@ -121,9 +121,9 @@
         </div>
         <nav>
             <a href="#features" onclick="scrollToSection('features')" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Features</a>
-            <a href="feature_breakdown.html" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Feature Breakdown</a>
+            <a class='text-gray-300 hover:text-white px-4 py-2 rounded-md' href='/feature_breakdown'>Feature Breakdown</a>
             <a href="#pricing" onclick="scrollToSection('pricing')" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Pricing</a>
-            <a href="help.html" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Help</a>
+            <a class='text-gray-300 hover:text-white px-4 py-2 rounded-md' href='/help'>Help</a>
         </nav>
     </header>
 
@@ -276,7 +276,13 @@
     </div>
 
     <!-- PayPal JavaScript SDK -->
-    <script src="https://www.paypal.com/sdk/js?client-id=AbFAFD99aa0hCnoggRAkKPvSg7i-FBwF1jQvHIqRwIxhgN4nh6fXk_-hxClQj0hCgvbH7m8vT6d2sPHi&currency=USD"></script>
+    <script 
+        src="https://www.paypal.com/sdk/js?client-id=AbFAFD99aa0hCnoggRAkKPvSg7i-FBwF1jQvHIqRwIxhgN4nh6fXk_-hxClQj0hCgvbH7m8vT6d2sPHi&currency=USD"
+        data-client-metadata-id="algotbp-website-client"
+        data-namespace="paypal_sdk"
+        data-page-type="home"
+        data-sdk-integration-source="integrationbuilder"
+    ></script>
 
     <script>
         // Function to scroll smoothly to a section
@@ -325,7 +331,7 @@
                 // Set up the transaction
                 createOrder: function(data, actions) {
                     // Call your backend to create the PayPal order
-                    return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app', { // <<< REPLACE THIS URL
+                    return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/create-paypal-order', {
                         method: 'post',
                         headers: {
                             'content-type': 'application/json'
@@ -342,8 +348,9 @@
                         return orderData.orderID; // Return the order ID from your backend
                     }).catch(function(error) {
                         console.error('Error creating PayPal order:', error);
-                        alert('Could not initiate payment. Please try again later.');
-                        closeModal();
+                        // Changed alert to a more user-friendly message in the modal
+                        modalMessage.textContent = 'Could not initiate payment. Please try again later.';
+                        purchaseModal.classList.remove('hidden'); // Show modal with error
                         return Promise.reject(error); // Propagate error to PayPal SDK
                     });
                 },
@@ -351,7 +358,7 @@
                 // Finalize the transaction
                 onApprove: function(data, actions) {
                     // Call your backend to capture the PayPal order
-                    return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app', { // <<< REPLACE THIS URL
+                    return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/capture-paypal-order', {
                         method: 'post',
                         headers: {
                             'content-type': 'application/json'
@@ -367,12 +374,15 @@
                     }).then(function(captureData) {
                         // Handle successful capture (e.g., show success message, trigger download)
                         if (captureData.status === 'success') {
-                            // Store data in sessionStorage and redirect to success.html
-                            sessionStorage.setItem('tradebotpro_download_url', captureData.download_url);
-                            sessionStorage.setItem('tradebotpro_license_key', captureData.license_key || ''); // Store empty string if no license
-                            sessionStorage.setItem('tradebotpro_product_type', currentVersion); // Store the product type
-                            window.location.href = 'success.html'; // Redirect to the new success page
-                            closeModal(); // Close modal, as we are redirecting
+                            // Check if download_url is present and redirect
+                            if (captureData.download_url) {
+                                window.location.href = captureData.download_url; // Initiate download
+                                closeModal(); // Close modal after initiating download
+                            } else {
+                                modalTitle.textContent = 'Payment Successful!';
+                                modalMessage.textContent = 'Your payment was successful. Please check your email for the download link and license key (if applicable).';
+                                purchaseModal.classList.remove('hidden');
+                            }
                         } else {
                             modalTitle.textContent = 'Payment Failed';
                             modalMessage.textContent = 'Payment failed: ' + (captureData.message || 'Unknown error.');
@@ -388,8 +398,9 @@
 
                 // Handle payment cancellation
                 onCancel: function(data) {
-                    window.location.href = 'cancel.html'; // Redirect to the cancel page
-                    closeModal();
+                    modalTitle.textContent = 'Payment Cancelled';
+                    modalMessage.textContent = 'You have cancelled the payment.';
+                    purchaseModal.classList.remove('hidden');
                 },
 
                 // Handle errors
