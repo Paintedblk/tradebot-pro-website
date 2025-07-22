@@ -275,21 +275,15 @@
         </div>
     </div>
 
-    <!-- PayPal JavaScript SDK -->
-    <script 
-        src="https://www.paypal.com/sdk/js?client-id=AbFAFD99aa0hCnoggRAkKPvSg7i-FBwF1jQvHIqRwIxhgN4nh6fXk_-hxClQj0hCgvbH7m8vT6d2sPHi&currency=USD"
-        data-client-metadata-id="algotbp-website-client"
-        data-namespace="paypal_sdk"
-        data-page-type="home"
-        data-sdk-integration-source="integrationbuilder"
-        onload="onPayPalSdkLoaded()"
-    ></script>
-
     <script>
+        // IMPORTANT: This script block should be placed BEFORE the PayPal SDK script
+        // so that onPayPalSdkLoaded is defined when the SDK's onload attribute calls it.
+
         // IMPORTANT: Replace with your actual deployed Google Cloud Run URL
         const BACKEND_BASE_URL = "https://tradebotpro-backend-553116950013.us-central1.run.app";
 
         let isPayPalSdkReady = false;
+        let currentVersion = ''; // To track which version is being purchased
 
         // This function is called when the PayPal SDK script has finished loading
         function onPayPalSdkLoaded() {
@@ -310,7 +304,7 @@
         const purchaseModal = document.getElementById('purchaseModal');
         const modalTitle = document.getElementById('modalTitle');
         const modalMessage = document.getElementById('modalMessage');
-        let currentVersion = ''; // To track which version is being purchased
+        
 
         function showPurchaseModal(version) {
             currentVersion = version;
@@ -451,5 +445,15 @@
             }
         }
     </script>
+
+    <!-- PayPal JavaScript SDK -->
+    <script 
+        src="https://www.paypal.com/sdk/js?client-id=AbFAFD99aa0hCnoggRAkKPvSg7i-FBwF1jQvHIqRwIxhgN4nh6fXk_-hxClQj0hCgvbH7m8vT6d2sPHi&currency=USD"
+        data-client-metadata-id="algotbp-website-client"
+        data-namespace="paypal_sdk"
+        data-page-type="home"
+        data-sdk-integration-source="integrationbuilder"
+        onload="onPayPalSdkLoaded()"
+    ></script>
 </body>
 </html>
