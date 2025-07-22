@@ -282,9 +282,25 @@
         data-namespace="paypal_sdk"
         data-page-type="home"
         data-sdk-integration-source="integrationbuilder"
+        onload="onPayPalSdkLoaded()"
     ></script>
 
     <script>
+        // IMPORTANT: Replace with your actual deployed Google Cloud Run URL
+        const BACKEND_BASE_URL = "https://tradebotpro-backend-553116950013.us-central1.run.app";
+
+        let isPayPalSdkReady = false;
+
+        // This function is called when the PayPal SDK script has finished loading
+        function onPayPalSdkLoaded() {
+            isPayPalSdkReady = true;
+            console.log("PayPal SDK loaded successfully.");
+            // If the modal was already open and waiting, try rendering buttons now
+            if (!purchaseModal.classList.contains('hidden') && currentVersion) {
+                renderPayPalButtons(currentVersion);
+            }
+        }
+
         // Function to scroll smoothly to a section
         function scrollToSection(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
@@ -308,8 +324,14 @@
             }
             purchaseModal.classList.remove('hidden');
 
-            // Render PayPal buttons when modal is shown
-            renderPayPalButtons(version);
+            // Only attempt to render PayPal buttons if the SDK is ready
+            if (isPayPalSdkReady) {
+                renderPayPalButtons(version);
+            } else {
+                modalTitle.textContent = 'Loading Payment System...';
+                modalMessage.textContent = 'Please wait while we prepare the payment options.';
+                // The onPayPalSdkLoaded function will try to render buttons once ready
+            }
         }
 
         function closeModal() {
@@ -327,90 +349,106 @@
 
         // Function to render PayPal buttons
         function renderPayPalButtons(version) {
-            paypal.Buttons({
-                // Set up the transaction
-                createOrder: function(data, actions) {
-                    // Call your backend to create the PayPal order
-                    return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/create-paypal-order', {
-                        method: 'post',
-                        headers: {
-                            'content-type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            product: version // 'lite' or 'pro'
-                        })
-                    }).then(function(res) {
-                        if (!res.ok) {
-                            return res.json().then(error => Promise.reject(error));
-                        }
-                        return res.json();
-                    }).then(function(orderData) {
-                        return orderData.orderID; // Return the order ID from your backend
-                    }).catch(function(error) {
-                        console.error('Error creating PayPal order:', error);
-                        // Changed alert to a more user-friendly message in the modal
-                        modalMessage.textContent = 'Could not initiate payment. Please try again later.';
-                        purchaseModal.classList.remove('hidden'); // Show modal with error
-                        return Promise.reject(error); // Propagate error to PayPal SDK
-                    });
-                },
+            const paypalButtonContainer = document.getElementById('paypal-button-container');
+            // Clear any existing buttons to prevent duplicates on re-open
+            paypalButtonContainer.innerHTML = ''; 
 
-                // Finalize the transaction
-                onApprove: function(data, actions) {
-                    // Call your backend to capture the PayPal order
-                    return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/capture-paypal-order', {
-                        method: 'post',
-                        headers: {
-                            'content-type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            orderID: data.orderID // The order ID from PayPal
-                        })
-                    }).then(function(res) {
-                        if (!res.ok) {
-                            return res.json().then(error => Promise.reject(error));
-                        }
-                        return res.json();
-                    }).then(function(captureData) {
-                        // Handle successful capture (e.g., show success message, trigger download)
-                        if (captureData.status === 'success') {
-                            // Check if download_url is present and redirect
-                            if (captureData.download_url) {
-                                window.location.href = captureData.download_url; // Initiate download
-                                closeModal(); // Close modal after initiating download
+            // Double check if the PayPal SDK is loaded (should be true due to onload, but good for safety)
+            if (typeof paypal === 'undefined') {
+                console.error("PayPal SDK still not loaded after expected ready state. This is unexpected.");
+                modalTitle.textContent = 'Payment Unavailable';
+                modalMessage.textContent = 'Payment system is not ready. Please try refreshing the page or check your internet connection.';
+                purchaseModal.classList.remove('hidden');
+                return;
+            }
+
+            try {
+                paypal.Buttons({
+                    // Set up the transaction
+                    createOrder: function(data, actions) {
+                        // Call your backend to create the PayPal order
+                        return fetch(`${BACKEND_BASE_URL}/api/create-paypal-order`, {
+                            method: 'post',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                product: version // 'lite' or 'pro'
+                            })
+                        }).then(function(res) {
+                            if (!res.ok) {
+                                return res.json().then(error => Promise.reject(error));
+                            }
+                            return res.json();
+                        }).then(function(orderData) {
+                            return orderData.orderID; // Return the order ID from your backend
+                        }).catch(function(error) {
+                            console.error('Error creating PayPal order:', error);
+                            modalTitle.textContent = 'Payment Error';
+                            modalMessage.textContent = 'Could not initiate payment. Please try again later.';
+                            purchaseModal.classList.remove('hidden');
+                            return Promise.reject(error); // Propagate error to PayPal SDK
+                        });
+                    },
+
+                    // Finalize the transaction
+                    onApprove: function(data, actions) {
+                        // Call your backend to capture the PayPal order
+                        return fetch(`${BACKEND_BASE_URL}/api/capture-paypal-order`, {
+                            method: 'post',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                orderID: data.orderID // The order ID from PayPal
+                            })
+                        }).then(function(res) {
+                            if (!res.ok) {
+                                return res.json().then(error => Promise.reject(error));
+                            }
+                            return res.json();
+                        }).then(function(captureData) {
+                            // Handle successful capture (e.g., show success message, trigger download)
+                            if (captureData.status === 'success') {
+                                // Store data in sessionStorage and redirect to success.html
+                                sessionStorage.setItem('tradebotpro_download_url', captureData.download_url);
+                                sessionStorage.setItem('tradebotpro_license_key', captureData.license_key || ''); // Store empty string if no license
+                                sessionStorage.setItem('tradebotpro_product_type', currentVersion); // Store the product type
+                                window.location.href = 'success.html'; // Redirect to the new success page
+                                closeModal(); // Close modal, as we are redirecting
                             } else {
-                                modalTitle.textContent = 'Payment Successful!';
-                                modalMessage.textContent = 'Your payment was successful. Please check your email for the download link and license key (if applicable).';
+                                modalTitle.textContent = 'Payment Failed';
+                                modalMessage.textContent = 'Payment failed: ' + (captureData.message || 'Unknown error.');
                                 purchaseModal.classList.remove('hidden');
                             }
-                        } else {
-                            modalTitle.textContent = 'Payment Failed';
-                            modalMessage.textContent = 'Payment failed: ' + (captureData.message || 'Unknown error.');
+                        }).catch(function(error) {
+                            console.error('Error capturing PayPal order:', error);
+                            modalTitle.textContent = 'Payment Error';
+                            modalMessage.textContent = 'An error occurred during payment capture. Please try again.';
                             purchaseModal.classList.remove('hidden');
-                        }
-                    }).catch(function(error) {
-                        console.error('Error capturing PayPal order:', error);
-                        modalTitle.textContent = 'Payment Error';
-                        modalMessage.textContent = 'An error occurred during payment capture. Please try again.';
+                        });
+                    },
+
+                    // Handle payment cancellation
+                    onCancel: function(data) {
+                        window.location.href = 'cancel.html'; // Redirect to the cancel page
+                        closeModal();
+                    },
+
+                    // Handle errors
+                    onError: function(err) {
+                        console.error('PayPal button error:', err);
+                        modalTitle.textContent = 'PayPal Error';
+                        modalMessage.textContent = 'An error occurred during the PayPal payment process. Please try again.';
                         purchaseModal.classList.remove('hidden');
-                    });
-                },
-
-                // Handle payment cancellation
-                onCancel: function(data) {
-                    modalTitle.textContent = 'Payment Cancelled';
-                    modalMessage.textContent = 'You have cancelled the payment.';
-                    purchaseModal.classList.remove('hidden');
-                },
-
-                // Handle errors
-                onError: function(err) {
-                    console.error('PayPal button error:', err);
-                    modalTitle.textContent = 'PayPal Error';
-                    modalMessage.textContent = 'An error occurred during the PayPal payment process. Please try again.';
-                    purchaseModal.classList.remove('hidden');
-                }
-            }).render('#paypal-button-container'); // Render the buttons into the container
+                    }
+                }).render('#paypal-button-container'); // Render the buttons into the container
+            } catch (e) {
+                console.error("Error rendering PayPal buttons:", e);
+                modalTitle.textContent = 'Payment System Error';
+                modalMessage.textContent = 'There was an unexpected error initializing the payment buttons. Please try again later.';
+                purchaseModal.classList.remove('hidden');
+            }
         }
     </script>
 </body>
