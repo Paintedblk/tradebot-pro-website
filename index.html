@@ -1,16 +1,3 @@
-I've updated the `index (1).html` file to display a **license key** and trigger a **download** after a successful PayPal payment.
-
-Here's a summary of the changes:
-
-  * **License Key Display**: After a successful payment, the `modalTitle` will show "Payment Successful\!", and the `modalMessage` will be updated to include the license key returned from your backend.
-  * **Automatic Download Trigger**: If your backend provides a `downloadLink` in its response, the browser will automatically start the download of the associated file.
-  * **Modal Behavior**: The purchase confirmation modal will no longer close automatically on successful payment, allowing the user to see their license key before proceeding.
-
-**Important Note:** For this functionality to work completely, your backend API endpoint `https://tradebotpro-backend-553116950013.us-central1.run.app/api/capture-paypal-order` must be updated to return the `licenseKey` and `downloadLink` in its JSON response upon a successful payment.
-
-Here is the updated `index.html` file content:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
