@@ -279,122 +279,129 @@
     <script src="https://www.paypal.com/sdk/js?client-id=AbFAFD99aa0hCnoggRAkKPvSg7i-FBwF1jQvHIqRwIxhgN4nh6fXk_-hxClQj0hCgvbH7m8vT6d2sPHi&currency=USD"></script>
 
     <script>
-        // Function to scroll smoothly to a section
+        // Set your backend URL here
+        const BACKEND_URL = "https://tradebotpro-backend-553116950013.us-central1.run.app";
+
         function scrollToSection(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // --- Modal Logic ---
-        const purchaseModal = document.getElementById('purchaseModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalMessage = document.getElementById('modalMessage');
-        let currentVersion = ''; // To track which version is being purchased
+        function showPurchaseModal(productType) {
+            const modal = document.getElementById('purchaseModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalMessage = document.getElementById('modalMessage');
+            const paypalButtonContainer = document.getElementById('paypal-button-container');
 
-        function showPurchaseModal(version) {
-            currentVersion = version;
+            // Clear previous PayPal buttons if any
+            paypalButtonContainer.innerHTML = '';
+
+            let title = '';
+            let message = '';
             
-            if (version === 'full') {
-                modalTitle.textContent = 'Purchase TradeBotPro Pro Version';
-                modalMessage.textContent = 'To complete your purchase, proceed with payment. Your unique license key and download link will be sent to your email address after successful payment.';
-            } else { // lite version
-                modalTitle.textContent = 'Purchase TradeBotPro Lite Version';
-                modalMessage.textContent = 'To complete your purchase, proceed with payment. Your download link will be available after successful payment.';
+            if (productType === 'lite') {
+                title = 'Purchase TradeBotPro Lite Version';
+                message = 'You are about to purchase the Lite Version for $49.99. Click the PayPal button to complete your purchase.';
+            } else if (productType === 'full') {
+                title = 'Purchase TradeBotPro Pro Version';
+                message = 'You are about to purchase the Pro Version for $199.99. Click the PayPal button to complete your purchase.';
             }
-            purchaseModal.classList.remove('hidden');
 
-            // Render PayPal buttons when modal is shown
-            renderPayPalButtons(version);
-        }
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            modal.style.display = 'flex'; // Use flex to center content
 
-        function closeModal() {
-            purchaseModal.classList.add('hidden');
-            // Clear PayPal buttons when modal is closed
-            document.getElementById('paypal-button-container').innerHTML = '';
-        }
-
-        // Close modal if clicked outside content
-        window.onclick = function(event) {
-            if (event.target == purchaseModal) {
-                closeModal();
-            }
-        }
-
-        // Function to render PayPal buttons
-        function renderPayPalButtons(version) {
+            // Render PayPal buttons
             paypal.Buttons({
+                style: {
+                    layout: 'vertical',
+                    color:  'gold',
+                    shape:  'rect',
+                    label:  'paypal'
+                },
                 // Set up the transaction
                 createOrder: function(data, actions) {
-                    // Call your backend to create the PayPal order
-                    return fetch('https://tradebotpro-backend-553116950013.europe-west1.run.app/api/create-paypal-order', {
+                    return fetch(`${BACKEND_URL}/api/create-paypal-order`, {
                         method: 'post',
                         headers: {
-                            'content-type': 'application/json'
+                            'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            product: version // 'lite' or 'pro'
+                            product: productType // 'lite' or 'full'
                         })
-                    }).then(function(res) {
-                        if (!res.ok) {
-                            return res.json().then(error => Promise.reject(error));
+                    }).then(function(response) {
+                        if (!response.ok) {
+                            return response.json().then(err => { throw new Error(err.error || 'Failed to create order on backend'); });
                         }
-                        return res.json();
+                        return response.json();
                     }).then(function(orderData) {
-                        return orderData.orderID; // Return the order ID from your backend
+                        return orderData.orderID;
                     }).catch(function(error) {
                         console.error('Error creating PayPal order:', error);
-                        alert('Could not initiate payment. Please try again later.');
-                        closeModal();
-                        return Promise.reject(error); // Propagate error to PayPal SDK
+                        // Optionally display an error message to the user in the modal
+                        modalMessage.textContent = 'Error initiating payment. Please try again later.';
+                        return actions.reject(); // Prevent PayPal from proceeding
                     });
                 },
-
                 // Finalize the transaction
                 onApprove: function(data, actions) {
-                    // Call your backend to capture the PayPal order
-                    return fetch('https://tradebotpro-backend-553116950013.europe-west1.run.app/api/capture-paypal-order', {
+                    return fetch(`${BACKEND_URL}/api/capture-paypal-order`, {
                         method: 'post',
                         headers: {
-                            'content-type': 'application/json'
+                            'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            orderID: data.orderID // The order ID from PayPal
+                            orderID: data.orderID
                         })
-                    }).then(function(res) {
-                        if (!res.ok) {
-                            return res.json().then(error => Promise.reject(error));
+                    }).then(function(response) {
+                        if (!response.ok) {
+                            return response.json().then(err => { throw new Error(err.message || 'Failed to capture order on backend'); });
                         }
-                        return res.json();
+                        return response.json();
                     }).then(function(captureData) {
-                        // Handle successful capture (e.g., show success message, trigger download)
+                        console.log('Capture successful:', captureData);
                         if (captureData.status === 'success') {
-                            alert('Payment successful! Your download and license key (if applicable) will be sent to your email.');
-                            closeModal();
-                            // You might redirect to a success page or update the UI
-                            // window.location.href = 'success.html'; // Example redirect
+                            // Store data in session storage for the success page
+                            sessionStorage.setItem('tradebotpro_product_type', productType);
+                            sessionStorage.setItem('tradebotpro_license_key', captureData.license_key);
+                            sessionStorage.setItem('tradebotpro_download_url', captureData.download_url);
+                            window.location.href = 'success.html'; // Redirect to success page
                         } else {
-                            alert('Payment failed: ' + captureData.message);
+                            console.error('Payment not completed:', captureData.message);
+                            window.location.href = 'cancelled.html'; // Redirect to cancelled page
                         }
                     }).catch(function(error) {
                         console.error('Error capturing PayPal order:', error);
-                        alert('An error occurred during payment capture. Please try again.');
-                        closeModal();
+                        window.location.href = 'cancelled.html'; // Redirect to cancelled page on error
                     });
                 },
-
-                // Handle payment cancellation
+                // Handle when the user cancels the payment
                 onCancel: function(data) {
-                    alert('Payment cancelled.');
-                    closeModal();
+                    console.log('Payment cancelled by user:', data);
+                    window.location.href = 'cancelled.html'; // Redirect to cancelled page
                 },
-
-                // Handle errors
+                // Handle any errors that occur during the payment process
                 onError: function(err) {
-                    console.error('PayPal button error:', err);
-                    alert('An error occurred during the PayPal payment process. Please try again.');
-                    closeModal();
+                    console.error('PayPal error:', err);
+                    window.location.href = 'cancelled.html'; // Redirect to cancelled page on error
                 }
-            }).render('#paypal-button-container'); // Render the buttons into the container
+            }).render('#paypal-button-container'); // Render the buttons into the div
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('purchaseModal');
+            modal.style.display = 'none';
+        }
+
+        // Close modal if user clicks outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('purchaseModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
         }
     </script>
+
 </body>
 </html>
+
+
