@@ -6,104 +6,104 @@
     <title>TradeBotPro - Automate Your Trading</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        [span_193](start_span)@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');[span_193](end_span)
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0d1117; /* Dark background for a professional tech feel */
-            color: #e6edf3; /* Light text for contrast */
+            [span_194](start_span)font-family: 'Inter', sans-serif;[span_194](end_span)
+            background-color: #0d1117; [span_195](start_span)/* Dark background for a professional tech feel */[span_195](end_span)
+            color: #e6edf3; [span_196](start_span)/* Light text for contrast */[span_196](end_span)
         }
         .gradient-bg {
-            background: linear-gradient(135deg, #1a202c, #2d3748);
+            [span_197](start_span)background: linear-gradient(135deg, #1a202c, #2d3748);[span_197](end_span)
         }
         .btn-primary {
-            background-image: linear-gradient(to right, #10B981, #059669); /* Green gradient */
-            transition: all 0.3s ease;
+            background-image: linear-gradient(to right, #10B981, #059669); [span_198](start_span)/* Green gradient */[span_198](end_span)
+            [span_199](start_span)transition: all 0.3s ease;[span_199](end_span)
         }
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(16, 185, 129, 0.4);
+            [span_200](start_span)transform: translateY(-2px);[span_200](end_span)
+            [span_201](start_span)box-shadow: 0 8px 15px rgba(16, 185, 129, 0.4);[span_201](end_span)
         }
         .btn-secondary {
-            background-color: #4a5568; /* Grayish blue */
-            transition: all 0.3s ease;
+            background-color: #4a5568; [span_202](start_span)/* Grayish blue */[span_202](end_span)
+            [span_203](start_span)transition: all 0.3s ease;[span_203](end_span)
         }
         .btn-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(74, 85, 104, 0.4);
+            [span_204](start_span)transform: translateY(-2px);[span_204](end_span)
+            [span_205](start_span)box-shadow: 0 8px 15px rgba(74, 85, 104, 0.4);[span_205](end_span)
         }
         .feature-card {
-            background-color: #161b22; /* Slightly lighter dark for cards */
-            border: 1px solid #30363d;
-            transition: transform 0.2s ease-in-out;
+            background-color: #161b22; [span_206](start_span)/* Slightly lighter dark for cards */[span_206](end_span)
+            [span_207](start_span)border: 1px solid #30363d;[span_207](end_span)
+            [span_208](start_span)transition: transform 0.2s ease-in-out;[span_208](end_span)
         }
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            [span_209](start_span)transform: translateY(-5px);[span_209](end_span)
+            [span_210](start_span)box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);[span_210](end_span)
         }
         /* Custom Modal Styles */
         .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: none; [span_211](start_span)/* Hidden by default */[span_211](end_span)
+            position: fixed; [span_212](start_span)/* Stay in place */[span_212](end_span)
+            z-index: 1000; [span_213](start_span)/* Sit on top */[span_213](end_span)
+            [span_214](start_span)left: 0;[span_214](end_span)
+            [span_215](start_span)top: 0;[span_215](end_span)
+            width: 100%; [span_216](start_span)/* Full width */[span_216](end_span)
+            height: 100%; [span_217](start_span)/* Full height */[span_217](end_span)
+            overflow: auto; [span_218](start_span)/* Enable scroll if needed */[span_218](end_span)
+            background-color: rgba(0,0,0,0.7); [span_219](start_span)/* Black w/ opacity */[span_219](end_span)
+            [span_220](start_span)display: flex;[span_220](end_span)
+            [span_221](start_span)align-items: center;[span_221](end_span)
+            [span_222](start_span)justify-content: center;[span_222](end_span)
         }
         .modal-content {
-            background-color: #1a202c;
-            margin: auto;
-            padding: 30px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            position: relative;
-            animation: fadeIn 0.3s ease-out;
+            [span_223](start_span)background-color: #1a202c;[span_223](end_span)
+            [span_224](start_span)margin: auto;[span_224](end_span)
+            [span_225](start_span)padding: 30px;[span_225](end_span)
+            [span_226](start_span)border-radius: 10px;[span_226](end_span)
+            [span_227](start_span)width: 90%;[span_227](end_span)
+            [span_228](start_span)max-width: 500px;[span_228](end_span)
+            [span_229](start_span)box-shadow: 0 5px 15px rgba(0,0,0,0.5);[span_229](end_span)
+            [span_230](start_span)position: relative;[span_230](end_span)
+            [span_231](start_span)animation: fadeIn 0.3s ease-out;[span_231](end_span)
         }
         .close-button {
-            color: #aaa;
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
+            [span_232](start_span)color: #aaa;[span_232](end_span)
+            [span_233](start_span)position: absolute;[span_233](end_span)
+            [span_234](start_span)top: 10px;[span_234](end_span)
+            [span_235](start_span)right: 20px;[span_235](end_span)
+            [span_236](start_span)font-size: 28px;[span_236](end_span)
+            [span_237](start_span)font-weight: bold;[span_237](end_span)
+            [span_238](start_span)cursor: pointer;[span_238](end_span)
         }
         .close-button:hover,
         .close-button:focus {
-            color: #e6edf3;
-            text-decoration: none;
-            cursor: pointer;
+            [span_239](start_span)color: #e6edf3;[span_239](end_span)
+            [span_240](start_span)text-decoration: none;[span_240](end_span)
+            [span_241](start_span)cursor: pointer;[span_241](end_span)
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(-20px); [span_242](start_span)}
+            to { opacity: 1; transform: translateY(0); }[span_242](end_span)
         }
         /* Comparison Table Styles */
         .comparison-table th, .comparison-table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #30363d;
+            [span_243](start_span)padding: 12px 15px;[span_243](end_span)
+            [span_244](start_span)text-align: left;[span_244](end_span)
+            [span_245](start_span)border-bottom: 1px solid #30363d;[span_245](end_span)
         }
         .comparison-table th {
-            background-color: #1a202c;
-            color: #e6edf3;
-            font-weight: 600;
+            [span_246](start_span)background-color: #1a202c;[span_246](end_span)
+            [span_247](start_span)color: #e6edf3;[span_247](end_span)
+            [span_248](start_span)font-weight: 600;[span_248](end_span)
         }
         .comparison-table tbody tr:last-child td {
-            border-bottom: none;
+            [span_249](start_span)border-bottom: none;[span_249](end_span)
         }
         .check-icon {
-            color: #10B981; /* Green check */
+            color: #10B981; [span_250](start_span)/* Green check */[span_250](end_span)
         }
         .cross-icon {
-            color: #EF4444; /* Red cross */
+            color: #EF4444; [span_251](start_span)/* Red cross */[span_251](end_span)
         }
     </style>
 </head>
@@ -112,93 +112,93 @@
     <header class="bg-gray-900 shadow-lg py-4 px-6 flex justify-between items-center fixed w-full z-50">
         <div class="flex items-center space-x-3">
             <svg class="w-8 h-8 text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l3 3a1 1 0 001.414-1.414L11 9.586V6z" clip-rule="evenodd"></path>
+                [span_252](start_span)<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l3 3a1 1 0 001.414-1.414L11 9.586V6z" clip-rule="evenodd"></path>[span_252](end_span)
             </svg>
-            <h1 class="text-3xl font-bold text-white">TradeBotPro <span class="text-green-400">Pro Version</span></h1>
+            [span_253](start_span)<h1 class="text-3xl font-bold text-white">TradeBotPro <span class="text-green-400">Pro Version</span></h1>[span_253](end_span)
         </div>
         <nav>
             <a href="#features" onclick="scrollToSection('features')" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Features</a>
-            <a href="feature_breakdown.html" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Feature Breakdown</a>
-            <a href="#pricing" onclick="scrollToSection('pricing')" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Pricing</a>
-            <a href="help.html" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Help</a>
+            [span_254](start_span)<a href="feature_breakdown.html" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Feature Breakdown</a>[span_254](end_span)
+            [span_255](start_span)<a href="#pricing" onclick="scrollToSection('pricing')" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Pricing</a>[span_255](end_span)
+            [span_256](start_span)<a href="help.html" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Help</a>[span_256](end_span)
         </nav>
     </header>
 
     <section class="relative h-screen flex items-center justify-center text-center text-white overflow-hidden gradient-bg">
         <div class="absolute inset-0 bg-black opacity-50"></div>
-        <div class="relative z-10 p-8 max-w-4xl mx-auto">
+        [span_257](start_span)<div class="relative z-10 p-8 max-w-4xl mx-auto">[span_257](end_span)
             <h2 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6 animate-pulse-slow">
                 Unlock Your Trading Potential with <span class="text-green-400">TradeBotPro Pro Version</span>
-            </h2>
+            [span_258](start_span)</h2>[span_258](end_span)
             <p class="text-xl md:text-2xl mb-8 opacity-90">
-                Intelligent Automation for Stocks & Options. Maximize Profits, Minimize Manual Effort.
+                Intelligent Automation for Stocks & Options. [span_259](start_span)Maximize Profits, Minimize Manual Effort.[span_259](end_span)
             </p>
             <div class="space-x-4">
                 <button onclick="scrollToSection('pricing')" class="btn-primary text-lg md:text-xl font-semibold py-3 px-8 rounded-lg shadow-lg">
                     Get the Pro Version
-                </button>
+                [span_260](start_span)</button>[span_260](end_span)
                 <button onclick="scrollToSection('pricing')" class="btn-secondary text-lg md:text-xl font-semibold py-3 px-8 rounded-lg shadow-lg">
                     Get Lite Version
-                </button>
+                [span_261](start_span)</button>[span_261](end_span)
             </div>
         </div>
     </section>
 
     <section id="features" class="py-16 px-6 bg-gray-900">
-        <h2 class="text-4xl font-bold text-center mb-12 text-white">Why Choose TradeBotPro?</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        [span_262](start_span)<h2 class="text-4xl font-bold text-center mb-12 text-white">Why Choose TradeBotPro?</h2>[span_262](end_span)
+        [span_263](start_span)<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">[span_263](end_span)
             
             <div class="feature-card p-6 rounded-lg shadow-xl flex flex-col items-center text-center">
-                <svg class="w-16 h-16 text-blue-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 013 14v3a1 1 0 001 1h12a1 1 0 001-1v-3a1 1 0 01-.293-.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 110-6 3 3 0 010 6z"></path></svg>
-                <h3 class="text-2xl font-semibold mb-3 text-green-300">Advanced AI Decision-Making</h3>
-                <p class="text-gray-400 mb-4">Leveraging cutting-edge algorithms and technical indicators (RSI, MACD) for precise trade entry and exit points.</p>
+                [span_264](start_span)<svg class="w-16 h-16 text-blue-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 013 14v3a1 1 0 001 1h12a1 1 0 001-1v-3a1 1 0 01-.293-.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 110-6 3 3 0 010 6z"></path></svg>[span_264](end_span)
+                [span_265](start_span)<h3 class="text-2xl font-semibold mb-3 text-green-300">Advanced AI Decision-Making</h3>[span_265](end_span)
+                [span_266](start_span)<p class="text-gray-400 mb-4">Leveraging cutting-edge algorithms and technical indicators (RSI, MACD) for precise trade entry and exit points.</p>[span_266](end_span)
                 <p class="text-green-200 font-medium italic">
-                    Profit Example: "Imagine identifying a momentum breakout in TSLA, entering at $180, and exiting at $185 for a swift <span class="text-green-400 font-bold">$500 profit</span> on a single day trade."
+                    [span_267](start_span)Profit Example: "Imagine identifying a momentum breakout in TSLA, entering at $180, and exiting at $185 for a swift <span class="text-green-400 font-bold">$500 profit</span> on a single day trade."[span_267](end_span)
                 </p>
             </div>
 
             <div class="feature-card p-6 rounded-lg shadow-xl flex flex-col items-center text-center">
-                <svg class="w-16 h-16 text-purple-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
-                <h3 class="text-2xl font-semibold mb-3 text-green-300">Fractional Share Trading</h3>
-                <p class="text-gray-400 mb-4">Maximize every dollar. Invest in high-value stocks like NVDA or GOOG with as little as $1, ensuring no capital sits idle.</p>
+                [span_268](start_span)<svg class="w-16 h-16 text-purple-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>[span_268](end_span)
+                [span_269](start_span)<h3 class="text-2xl font-semibold mb-3 text-green-300">Fractional Share Trading</h3>[span_269](end_span)
+                <p class="text-gray-400 mb-4">Maximize every dollar. [span_270](start_span)Invest in high-value stocks like NVDA or GOOG with as little as $1, ensuring no capital sits idle.</p>[span_270](end_span)
                 <p class="text-green-200 font-medium italic">
-                    Profit Example: "Even with just $25, TradeBotPro can buy 0.02 shares of a $1200 stock, turning a 5% gain into a <span class="text-green-400 font-bold">$1.25 profit</span> that compounds over time."
+                    [span_271](start_span)Profit Example: "Even with just $25, TradeBotPro can buy 0.02 shares of a $1200 stock, turning a 5% gain into a <span class="text-green-400 font-bold">$1.25 profit</span> that compounds over time."[span_271](end_span)
                 </p>
             </div>
 
             <div class="feature-card p-6 rounded-lg shadow-xl flex flex-col items-center text-center">
-                <svg class="w-16 h-16 text-yellow-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17.555 1.683a1 1 0 00-1.912-.087l-2.007 4.125a3 3 0 00-1.07 1.07L.707 15.293A1 1 0 001.414 16l4.01-4.01a1 1 0 001.07-1.07l4.125-2.007a1 1 0 00-.087-1.912l-4.125-2.007a3 3 0 00-1.07-1.07L3.707 2.707A1 1 0 002.99 2.99l4.01 4.01a1 1 0 001.07 1.07l4.125 2.007a1 1 0 00.087 1.912l2.007-4.125a3 3 0 001.07-1.07l4.01-4.01A1 1 0 0017.555 1.683z"></path></svg>
-                <h3 class="text-2xl font-semibold mb-3 text-green-300">Experimental Options Trading</h3>
-                <p class="text-gray-400 mb-4">Explore amplified returns with our new, experimental options module. Buy Calls or Puts based on market direction.</p>
+                [span_272](start_span)<svg class="w-16 h-16 text-yellow-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17.555 1.683a1 1 0 00-1.912-.087l-2.007 4.125a3 3 0 00-1.07 1.07L.707 15.293A1 1 0 001.414 16l4.01-4.01a1 1 0 001.07-1.07l4.125-2.007a1 1 0 00-.087-1.912l-4.125-2.007a3 3 0 00-1.07-1.07L3.707 2.707A1 1 0 002.99 2.99l4.01 4.01a1 1 0 001.07 1.07l4.125 2.007a1 1 0 00.087 1.912l2.007-4.125a3 3 0 001.07-1.07l4.01-4.01A1 1 0 0017.555 1.683z"></path></svg>[span_272](end_span)
+                [span_273](start_span)<h3 class="text-2xl font-semibold mb-3 text-green-300">Experimental Options Trading</h3>[span_273](end_span)
+                <p class="text-gray-400 mb-4">Explore amplified returns with our new, experimental options module. [span_274](start_span)Buy Calls or Puts based on market direction.</p>[span_274](end_span)
                 <p class="text-green-200 font-medium italic">
-                    Profit Example: "A correctly predicted bullish move on SPY could turn a $35 option premium into <span class="text-green-400 font-bold">$105 profit</span> in days, a 300% gain! (High risk, high reward)."
+                    [span_275](start_span)Profit Example: "A correctly predicted bullish move on SPY could turn a $35 option premium into <span class="text-green-400 font-bold">$105 profit</span> in days, a 300% gain! (High risk, high reward)."[span_275](end_span)
                 </p>
             </div>
 
             <div class="feature-card p-6 rounded-lg shadow-xl flex flex-col items-center text-center">
-                <svg class="w-16 h-16 text-red-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3 1h10v8H5V6zm1-2a1 1 0 00-1 1v1a1 1 0 102 0V5a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                <h3 class="text-2xl font-semibold mb-3 text-green-300">Persistent State & Auto-Restart</h3>
-                <p class="text-gray-400 mb-4">Never lose your progress. The bot remembers all trades, P/L, and automatically resumes trading after market close.</p>
+                [span_276](start_span)<svg class="w-16 h-16 text-red-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3 1h10v8H5V6zm1-2a1 1 0 00-1 1v1a1 1 0 102 0V5a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>[span_276](end_span)
+                [span_277](start_span)<h3 class="text-2xl font-semibold mb-3 text-green-300">Persistent State & Auto-Restart</h3>[span_277](end_span)
+                <p class="text-gray-400 mb-4">Never lose your progress. [span_278](start_span)The bot remembers all trades, P/L, and automatically resumes trading after market close.</p>[span_278](end_span)
                 <p class="text-green-200 font-medium italic">
-                    Benefit: "Seamless operation ensures you're always ready for the next market open, without manual intervention."
+                    [span_279](start_span)Benefit: "Seamless operation ensures you're always ready for the next market open, without manual intervention."[span_279](end_span)
                 </p>
             </div>
 
             <div class="feature-card p-6 rounded-lg shadow-xl flex flex-col items-center text-center">
-                <svg class="w-16 h-16 text-teal-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                <h3 class="text-2xl font-semibold mb-3 text-green-300">Real-time Reconciliation</h3>
-                <p class="text-gray-400 mb-4">Your P/L is always accurate. The bot verifies its state against your live brokerage, even after manual trades or cancellations.</p>
+                [span_280](start_span)<svg class="w-16 h-16 text-teal-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>[span_280](end_span)
+                [span_281](start_span)<h3 class="text-2xl font-semibold mb-3 text-green-300">Real-time Reconciliation</h3>[span_281](end_span)
+                <p class="text-gray-400 mb-4">Your P/L is always accurate. [span_282](start_span)The bot verifies its state against your live brokerage, even after manual trades or cancellations.</p>[span_282](end_span)
                 <p class="text-green-200 font-medium italic">
-                    Benefit: "Complete transparency and peace of mind, knowing your performance metrics are always correct."
+                    [span_283](start_span)Benefit: "Complete transparency and peace of mind, knowing your performance metrics are always correct."[span_283](end_span)
                 </p>
             </div>
 
             <div class="feature-card p-6 rounded-lg shadow-xl flex flex-col items-center text-center">
-                <svg class="w-16 h-16 text-orange-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                <h3 class="text-2xl font-semibold mb-3 text-green-300">Comprehensive Risk Management</h3>
-                <p class="text-gray-400 mb-4">Built-in daily profit targets, stop-loss limits, and concurrent trade limits protect your capital.</p>
+                [span_284](start_span)<svg class="w-16 h-16 text-orange-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>[span_284](end_span)
+                [span_285](start_span)<h3 class="text-2xl font-semibold mb-3 text-green-300">Comprehensive Risk Management</h3>[span_285](end_span)
+                [span_286](start_span)<p class="text-gray-400 mb-4">Built-in daily profit targets, stop-loss limits, and concurrent trade limits protect your capital.</p>[span_286](end_span)
                 <p class="text-green-200 font-medium italic">
-                    Benefit: "Trade with confidence, knowing your downside is managed automatically."
+                    [span_287](start_span)Benefit: "Trade with confidence, knowing your downside is managed automatically."[span_287](end_span)
                 </p>
             </div>
 
@@ -206,37 +206,37 @@
     </section>
 
     <section id="pricing" class="py-16 px-6 bg-gray-800">
-        <h2 class="text-4xl font-bold text-center mb-12 text-white">Choose Your Trading Power</h2>
+        [span_288](start_span)<h2 class="text-4xl font-bold text-center mb-12 text-white">Choose Your Trading Power</h2>[span_288](end_span)
         <div class="flex flex-col md:flex-row justify-center items-stretch gap-8 max-w-5xl mx-auto">
             
-            <div class="flex-1 feature-card p-8 rounded-lg shadow-2xl flex flex-col items-center text-center transform hover:scale-105 transition-transform duration-300">
-                <h3 class="text-3xl font-bold text-blue-400 mb-4">Lite Version</h3>
-                <p class="text-5xl font-extrabold text-white mb-6">$49.99</p>
+            [span_289](start_span)<div class="flex-1 feature-card p-8 rounded-lg shadow-2xl flex flex-col items-center text-center transform hover:scale-105 transition-transform duration-300">[span_289](end_span)
+                [span_290](start_span)<h3 class="text-3xl font-bold text-blue-400 mb-4">Lite Version</h3>[span_290](end_span)
+                [span_291](start_span)<p class="text-5xl font-extrabold text-white mb-6">$49.99</p>[span_291](end_span)
                 <ul class="text-gray-300 text-lg space-y-3 mb-8 text-left w-full">
-                    <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Lifetime Access</li>
-                    <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Basic Features (No Options)</li>
-                    <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Direct Download</li>
-                    <li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Options Trading</li>
-                    <li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Persistent State</li>
-                    <li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Reconciliation</li>
-                    <li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Account-Level Risk Management</li>
+                    [span_292](start_span)<li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Lifetime Access</li>[span_292](end_span)
+                    [span_293](start_span)<li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Basic Features (No Options)</li>[span_293](end_span)
+                    [span_294](start_span)<li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Direct Download</li>[span_294](end_span)
+                    [span_295](start_span)<li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Options Trading</li>[span_295](end_span)
+                    [span_296](start_span)<li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Persistent State</li>[span_296](end_span)
+                    [span_297](start_span)<li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Reconciliation</li>[span_297](end_span)
+                    [span_298](start_span)<li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Account-Level Risk Management</li>[span_298](end_span)
                 </ul>
                 <button onclick="showPurchaseModal('lite')" class="btn-secondary text-xl font-semibold py-3 px-10 rounded-lg shadow-lg w-full">
-                    Get Now for $49.99
+                    [span_299](start_span)Get Now for $49.99[span_299](end_span)
                 </button>
             </div>
 
             <div class="flex-1 feature-card p-8 rounded-lg shadow-2xl flex flex-col items-center text-center transform hover:scale-105 transition-transform duration-300">
-                <h3 class="text-3xl font-bold text-green-400 mb-4">Pro Version</h3>
-                <p class="text-5xl font-extrabold text-white mb-6">$199.99</p>
+                [span_300](start_span)<h3 class="text-3xl font-bold text-green-400 mb-4">Pro Version</h3>[span_300](end_span)
+                [span_301](start_span)<p class="text-5xl font-extrabold text-white mb-6">$199.99</p>[span_301](end_span)
                 <ul class="text-gray-300 text-lg space-y-3 mb-8 text-left w-full">
-                    <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Lifetime Access</li>
-                    <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> All Features (Including Options)</li>
-                    <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Unique License Key</li>
-                    <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Immediate Download</li>
+                    [span_302](start_span)<li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Lifetime Access</li>[span_302](end_span)
+                    [span_303](start_span)<li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> All Features (Including Options)</li>[span_303](end_span)
+                    [span_304](start_span)<li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Unique License Key</li>[span_304](end_span)
+                    [span_305](start_span)<li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Immediate Download</li>[span_305](end_span)
                 </ul>
-                <button onclick="showPurchaseModal('full')" class="btn-primary text-xl font-semibold py-3 px-10 rounded-lg shadow-lg w-full">
-                    Buy Now for $199.99
+                [span_306](start_span)<button onclick="showPurchaseModal('full')" class="btn-primary text-xl font-semibold py-3 px-10 rounded-lg shadow-lg w-full">[span_306](end_span)
+                    [span_307](start_span)Buy Now for $199.99[span_307](end_span)
                 </button>
             </div>
 
@@ -244,16 +244,16 @@
     </section>
 
     <footer class="bg-gray-900 py-8 text-center text-gray-500 text-sm">
-        <p>&copy; 2025 TradeBotPro. All rights reserved. Trading involves substantial risk.</p>
+        <p>&copy; 2025 TradeBotPro. All rights reserved. [span_308](start_span)Trading involves substantial risk.</p>[span_308](end_span)
     </footer>
 
     <div id="purchaseModal" class="modal hidden">
         <div class="modal-content">
-            <span class="close-button" onclick="closeModal()">&times;</span>
-            <h3 id="modalTitle" class="text-2xl font-bold text-white mb-4"></h3>
-            <p id="modalMessage" class="text-gray-300 mb-6"></p>
+            [span_309](start_span)<span class="close-button" onclick="closeModal()">&times;</span>[span_309](end_span)
+            [span_310](start_span)<h3 id="modalTitle" class="text-2xl font-bold text-white mb-4"></h3>[span_310](end_span)
+            [span_311](start_span)<p id="modalMessage" class="text-gray-300 mb-6"></p>[span_311](end_span)
             
-            <div id="paypal-button-container"></div>
+            [span_312](start_span)<div id="paypal-button-container"></div>[span_312](end_span)
 
         </div>
     </div>
@@ -261,138 +261,154 @@
     <script src="https://www.paypal.com/sdk/js?client-id=AbFAFD99aa0hCnoggRAkKPvSg7i-FBwF1jQvHIqRwIxhgN4nh6fXk_-hxClQj0hCgvbH7m8vT6d2sPHi&currency=USD"></script>
 
     <script>
-        // Function to scroll smoothly to a section
+        // Store the product type selected for the modal
+        let currentProductType = '';
+        const BACKEND_URL = "https://tradebotpro-backend-553116950013.us-central1.run.app"; // Your backend URL
+
         function scrollToSection(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // --- Modal Logic ---
-        const purchaseModal = document.getElementById('purchaseModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalMessage = document.getElementById('modalMessage');
-        let currentVersion = ''; // To track which version is being purchased
+        function showPurchaseModal(productType) {
+            currentProductType = productType; // Store product type globally for modal
+            const modal = document.getElementById('purchaseModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalMessage = document.getElementById('modalMessage');
+            const paypalButtonContainer = document.getElementById('paypal-button-container');
 
-        function showPurchaseModal(version) {
-            currentVersion = version;
-            
-            if (version === 'full') {
-                modalTitle.textContent = 'Purchase TradeBotPro Pro Version';
-                modalMessage.textContent = 'To complete your purchase, proceed with payment. Your unique license key and download link will be sent to your email address after successful payment.';
-            } else { // lite version
-                modalTitle.textContent = 'Purchase TradeBotPro Lite Version';
-                modalMessage.textContent = 'To complete your purchase, proceed with payment. Your download link will be available after successful payment.';
+            let title = '';
+            let message = '';
+
+            if (productType === 'full') {
+                title = 'Purchase TradeBotPro Pro Version';
+                message = 'You are about to purchase the full version for $199.99. Click the PayPal button to complete your purchase.';
+            } else if (productType === 'lite') {
+                title = 'Purchase TradeBotPro Lite Version';
+                message = 'You are about to purchase the lite version for $49.99. Click the PayPal button to complete your purchase.';
             }
-            purchaseModal.classList.remove('hidden');
 
-            // Render PayPal buttons when modal is shown
-            renderPayPalButtons(version);
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            modal.classList.remove('hidden');
+
+            // Clear previous buttons if any
+            paypalButtonContainer.innerHTML = ''; 
+
+            // Render PayPal buttons inside the modal
+            renderPayPalButtons(productType);
         }
 
         function closeModal() {
-            purchaseModal.classList.add('hidden');
-            // Clear PayPal buttons when modal is closed
-            document.getElementById('paypal-button-container').innerHTML = '';
+            const modal = document.getElementById('purchaseModal');
+            modal.classList.add('hidden');
+            // Optionally clear the PayPal button container if you re-render on each open
+            document.getElementById('paypal-button-container').innerHTML = ''; 
         }
 
-        // Close modal if clicked outside content
+        // Close modal if user clicks outside of modal content
         window.onclick = function(event) {
-            if (event.target == purchaseModal) {
+            const modal = document.getElementById('purchaseModal');
+            if (event.target == modal) {
                 closeModal();
             }
         }
 
-        // Function to render PayPal buttons
-        function renderPayPalButtons(version) {
+        // --- PayPal Button Rendering Logic ---
+        function renderPayPalButtons(productType) {
             paypal.Buttons({
-                // Set up the transaction
+                // Set up the transaction when a button is clicked
                 createOrder: function(data, actions) {
-                    // Call your backend to create the PayPal order
-                    return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/create-paypal-order', {
+                    console.log(`Creating order for product: ${productType}`);
+                    return fetch(`${BACKEND_URL}/api/create-paypal-order`, {
                         method: 'post',
                         headers: {
-                            'content-type': 'application/json'
+                            'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            product: version // 'lite' or 'pro'
+                            product: productType
                         })
-                    }).then(function(res) {
-                        if (!res.ok) {
-                            return res.json().then(error => Promise.reject(error));
+                    }).then(function(response) {
+                        if (!response.ok) {
+                            // Handle HTTP errors
+                            return response.json().then(errorData => {
+                                throw new Error(`Backend error: ${errorData.error || response.statusText}`);
+                            });
                         }
-                        return res.json();
+                        return response.json();
                     }).then(function(orderData) {
-                        return orderData.orderID; // Return the order ID from your backend
+                        // The orderID is returned from your backend
+                        return orderData.orderID; 
                     }).catch(function(error) {
                         console.error('Error creating PayPal order:', error);
-                        alert('Could not initiate payment. Please try again later.');
-                        closeModal();
-                        return Promise.reject(error); // Propagate error to PayPal SDK
+                        alert('Could not create PayPal order. Please try again or contact support.');
+                        closeModal(); // Close modal on error
                     });
                 },
 
                 // Finalize the transaction
                 onApprove: function(data, actions) {
-                    // Call your backend to capture the PayPal order
-                    return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/capture-paypal-order', {
+                    console.log('Order approved on PayPal, now capturing...');
+                    return fetch(`${BACKEND_URL}/api/capture-paypal-order`, {
                         method: 'post',
                         headers: {
-                            'content-type': 'application/json'
+                            'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            orderID: data.orderID // The order ID from PayPal
+                            orderID: data.orderID // Use the orderID from PayPal's response
                         })
-                    }).then(function(res) {
-                        if (!res.ok) {
-                            return res.json().then(error => Promise.reject(error));
+                    }).then(function(response) {
+                        if (!response.ok) {
+                            return response.json().then(errorData => {
+                                throw new Error(`Backend capture error: ${errorData.message || response.statusText}`);
+                            });
                         }
-                        return res.json();
+                        return response.json();
                     }).then(function(captureData) {
-                        // Handle successful capture (e.g., show success message, trigger download)
+                        console.log('PayPal capture response:', captureData);
+                        closeModal(); // Close the purchase modal
+
                         if (captureData.status === 'success') {
-                            let successMessage = 'Payment successful!';
-                            if (captureData.licenseKey) {
-                                successMessage += '<br><br>Your License Key: <strong>' + captureData.licenseKey + '</strong>';
+                            alert('Payment successful! Your download link and license key will be sent to your email.');
+                            // Optionally redirect user to a success page or display download link/license key
+                            // window.location.href = '/success.html'; // Or show details on current page
+                            if (captureData.download_url) {
+                                // For immediate download, if desired (though email is primary)
+                                // window.open(captureData.download_url, '_blank'); 
                             }
-                            if (captureData.downloadLink) {
-                                successMessage += '<br><br>Starting download...';
-                                // Create a temporary anchor element to trigger download
-                                const a = document.createElement('a');
-                                a.href = captureData.downloadLink;
-                                a.download = 'TradeBotPro.zip'; // You can customize the downloaded file name
-                                document.body.appendChild(a);
-                                a.click();
-                                document.body.removeChild(a);
+                            // Display license key if available and product is 'full'
+                            if (captureData.license_key && currentProductType === 'full') {
+                                // You might want to display this in a different modal or dedicated success page
+                                console.log("Your license key: " + captureData.license_key);
                             }
-                            modalTitle.textContent = 'Payment Successful!';
-                            modalMessage.innerHTML = successMessage;
-                            // Do not close modal immediately, allow user to see license key and download prompt
-                            // You might add a close button or auto-close after a delay if needed
+                            window.location.href = '/success.html'; // Redirect to a success page
                         } else {
-                            alert('Payment failed: ' + captureData.message);
-                            closeModal();
+                            alert('Payment not completed or failed fulfillment. Please contact support.');
+                            window.location.href = '/cancel.html'; // Redirect to a failure page
                         }
                     }).catch(function(error) {
                         console.error('Error capturing PayPal order:', error);
-                        alert('An error occurred during payment capture. Please try again.');
-                        closeModal();
+                        alert('Payment capture failed. Please try again or contact support.');
+                        window.location.href = '/cancel.html'; // Redirect on severe error during capture
                     });
                 },
 
-                // Handle payment cancellation
+                // Handle when the user cancels the payment
                 onCancel: function(data) {
-                    alert('Payment cancelled.');
-                    closeModal();
+                    console.log('PayPal payment cancelled:', data);
+                    closeModal(); // Close the modal
+                    alert('You have cancelled the payment.');
+                    // Optionally redirect to a cancellation page
+                    window.location.href = '/cancel.html'; 
                 },
 
-                // Handle errors
+                // Handle errors during the PayPal flow
                 onError: function(err) {
                     console.error('PayPal button error:', err);
-                    alert('An error occurred during the PayPal payment process. Please try again.');
-                    closeModal();
+                    alert('An error occurred with PayPal. Please try again.');
+                    closeModal(); // Close the modal
                 }
-            }).render('#paypal-button-container'); // Render the buttons into the container
+            }).render('#paypal-button-container'); // Render the PayPal buttons into the div
         }
     </script>
 </body>
 </html>
-```
