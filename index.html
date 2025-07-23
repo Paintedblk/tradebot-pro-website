@@ -325,7 +325,7 @@
                 // Set up the transaction
                 createOrder: function(data, actions) {
                     // Call your backend to create the PayPal order
-                    return fetch(' https://tradebotpro-backend-553116950013.europe-west1.run.app/api/create-paypal-order', {
+                    return fetch('https://tradebotpro-backend-553116950013.europe-west1.run.app/api/create-paypal-order', {
                         method: 'post',
                         headers: {
                             'content-type': 'application/json'
@@ -351,7 +351,7 @@
                 // Finalize the transaction
                 onApprove: function(data, actions) {
                     // Call your backend to capture the PayPal order
-                    return fetch(' https://tradebotpro-backend-553116950013.europe-west1.run.app/api/capture-paypal-order', {
+                    return fetch('https://tradebotpro-backend-553116950013.europe-west1.run.app/api/capture-paypal-order', {
                         method: 'post',
                         headers: {
                             'content-type': 'application/json'
