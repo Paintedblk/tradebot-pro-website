@@ -3,175 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TradeBotPro - Purchase Successful!</title>
+    <title>TradeBotPro - Payment Successful!</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d1117; /* Dark background */
-            color: #e6edf3; /* Light text */
+            background-color: #0d1117; /* Dark background for a professional tech feel */
+            color: #e6edf3; /* Light text for contrast */
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
         }
-        .gradient-bg {
-            background: linear-gradient(135deg, #1a202c, #2d3748);
+        .container {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            max-width: 600px;
+            width: 90%;
         }
-        .btn-primary {
+        .license-key-display {
+            background-color: #2d3748;
+            padding: 1rem;
+            border-radius: 5px;
+            word-break: break-all;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        .download-button {
             background-image: linear-gradient(to right, #10B981, #059669); /* Green gradient */
             transition: all 0.3s ease;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            color: white;
+            margin-top: 1.5rem;
+            cursor: pointer;
+            display: inline-block;
         }
-        .btn-primary:hover {
+        .download-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 15px rgba(16, 185, 129, 0.4);
-        }
-        .btn-primary:disabled {
-            background-image: none;
-            background-color: #4a5568; /* Gray background for disabled */
-            cursor: not-allowed;
-            opacity: 0.7;
-            box-shadow: none;
-            transform: none;
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Header -->
-    <header class="bg-gray-900 shadow-lg py-4 px-6 flex justify-between items-center fixed w-full z-50">
-        <div class="flex items-center space-x-3">
-            <svg class="w-8 h-8 text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l3 3a1 1 0 001.414-1.414L11 9.586V6z" clip-rule="evenodd"></path>
-            </svg>
-            <h1 class="text-3xl font-bold text-white">TradeBotPro</h1>
+    <div class="container">
+        <h2 class="text-4xl font-bold text-green-400 mb-4">Payment Successful!</h2>
+        <p class="text-xl text-gray-300 mb-6">Thank you for your purchase of the <span id="productTypeDisplay" class="font-semibold"></span>!</p>
+        
+        <div id="licenseKeySection" class="mb-4 hidden">
+            <p class="text-gray-400">Your unique license key:</p>
+            <p id="licenseKeyDisplay" class="license-key-display"></p>
+            <button onclick="copyLicenseKey()" class="text-blue-400 hover:underline mt-2 text-sm">Copy License Key</button>
         </div>
-        <nav>
-            <a href="index.html" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Home</a>
-            <a href="feature_breakdown.html" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Feature Breakdown</a>
-            <a href="index.html#pricing" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Pricing</a>
-            <a href="help.html" class="text-gray-300 hover:text-white px-4 py-2 rounded-md">Help</a>
-        </nav>
-    </header>
 
-    <!-- Success Content Section -->
-    <main class="flex-grow flex items-center justify-center text-center py-20 px-6 gradient-bg">
-        <div class="bg-gray-800 p-10 rounded-lg shadow-2xl max-w-2xl w-full">
-            <svg class="w-24 h-24 text-green-500 mx-auto mb-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-            </svg>
-            <h2 class="text-4xl font-bold text-white mb-4">Purchase Successful!</h2>
-            <p class="text-xl text-gray-300 mb-6">
-                Thank you for your purchase of the <span id="productType" class="font-semibold text-green-400"></span>!
-            </p>
-            <p id="downloadMessage" class="text-lg text-gray-300 mb-4">
-                Your download should begin automatically. Your download link and unique license key have also been sent to your email address.
-            </p>
-            <div id="licenseKeyDisplay" class="bg-gray-700 p-4 rounded-md mb-6 hidden">
-                <p class="text-sm text-gray-400 mb-2">For your convenience, here is your license key:</p>
-                <code id="licenseKey" class="text-green-300 text-lg font-mono break-all"></code>
-                <button onclick="copyLicenseKey()" class="btn-primary text-sm font-semibold py-2 px-4 rounded-md mt-3">
-                    Copy License Key
-                </button>
-            </div>
-            <button id="manualDownloadButton" class="btn-primary text-lg font-semibold py-3 px-8 rounded-lg shadow-lg inline-block mt-4">
-                Download Now (Backup)
-            </button>
-            <p class="text-lg text-gray-300 mb-8 mt-4">
-                Please check your inbox (and spam folder) for the email.
-            </p>
-            <a href="help.html" class="btn-primary text-lg font-semibold py-3 px-8 rounded-lg shadow-lg inline-block">
-                Go to Help Guide
-            </a>
-            <a href="index.html" class="btn-primary text-lg font-semibold py-3 px-8 rounded-lg shadow-lg inline-block ml-4">
-                Return to Home
-            </a>
+        <div id="downloadSection" class="mb-4 hidden">
+            <p class="text-gray-400">Your download should start automatically. If not, click the button below:</p>
+            <button id="downloadButton" class="download-button">Download TradeBotPro</button>
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 py-8 text-center text-gray-500 text-sm mt-auto">
-        <p>&copy; 2025 TradeBotPro. All rights reserved. Trading involves substantial risk.</p>
-    </footer>
+        <p class="text-gray-500 text-sm mt-8">A confirmation email with your license key and download link has also been sent to your registered email address.</p>
+        <a href="index.html" class="text-blue-400 hover:underline mt-4 inline-block">Return to Homepage</a>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const productTypeSpan = document.getElementById('productType');
-            const licenseKeyDisplay = document.getElementById('licenseKeyDisplay');
-            const licenseKeyElement = document.getElementById('licenseKey');
-            const manualDownloadButton = document.getElementById('manualDownloadButton');
-            const downloadMessage = document.getElementById('downloadMessage');
-
+        document.addEventListener('DOMContentLoaded', () => {
             const productType = sessionStorage.getItem('tradebotpro_product_type');
             const licenseKey = sessionStorage.getItem('tradebotpro_license_key');
             const downloadUrl = sessionStorage.getItem('tradebotpro_download_url');
 
-            if (productType) {
-                productTypeSpan.textContent = productType === 'full' ? 'TradeBotPro Pro Version' : 'TradeBotPro Lite Version';
-            } else {
-                productTypeSpan.textContent = 'TradeBotPro Bot'; // Fallback
+            document.getElementById('productTypeDisplay').textContent = productType === 'full' ? 'Pro Version' : 'Lite Version';
+
+            if (licenseKey && licenseKey !== 'null' && licenseKey !== '') {
+                document.getElementById('licenseKeySection').classList.remove('hidden');
+                document.getElementById('licenseKeyDisplay').textContent = licenseKey;
             }
 
-            // Display license key for both Lite and Pro now
-            if (licenseKey) {
-                licenseKeyElement.textContent = licenseKey;
-                licenseKeyDisplay.classList.remove('hidden');
-            }
-
-            // Handle download logic
             if (downloadUrl) {
-                // Automatic download
-                const a = document.createElement('a');
-                a.href = downloadUrl;
-                a.download = productType === 'full' ? 'TradeBotPro_Pro.zip' : 'TradeBotPro_Lite.zip';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                console.log('Automatic download initiated via signed URL.');
-
-                // Enable manual download button
-                manualDownloadButton.disabled = false;
-                manualDownloadButton.textContent = "Download Now (Backup)";
-                manualDownloadButton.onclick = function() {
-                    const b = document.createElement('a');
-                    b.href = downloadUrl;
-                    b.download = productType === 'full' ? 'TradeBotPro_Pro.zip' : 'TradeBotPro_Lite.zip';
-                    document.body.appendChild(b);
-                    b.click();
-                    document.body.removeChild(b);
-                    console.log('Manual download initiated via signed URL.');
+                document.getElementById('downloadSection').classList.remove('hidden');
+                document.getElementById('downloadButton').onclick = () => {
+                    const a = document.createElement('a');
+                    a.href = downloadUrl;
+                    a.download = 'TradeBotPro_Download.zip';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
                 };
-            } else {
-                // If download URL is not found, update the message and disable the button
-                downloadMessage.textContent = "The automatic download could not be initiated. Please check your email for the download link and license key.";
-                manualDownloadButton.textContent = "Download Not Available";
-                manualDownloadButton.disabled = true; // Disable the button
-                console.error("Download URL not found in session storage. Displaying alternative message to user.");
+                // Trigger download automatically on page load
+                document.getElementById('downloadButton').click();
             }
-
-            // Clear session storage items after use to prevent re-downloads/re-display on refresh
+            
+            // Clear session storage after displaying/using the data
             sessionStorage.removeItem('tradebotpro_product_type');
             sessionStorage.removeItem('tradebotpro_license_key');
             sessionStorage.removeItem('tradebotpro_download_url');
         });
 
         function copyLicenseKey() {
-            const licenseKeyElement = document.getElementById('licenseKey');
-            const textToCopy = licenseKeyElement.textContent;
-            
-            const textArea = document.createElement("textarea");
-            textArea.value = textToCopy;
-            document.body.appendChild(textArea);
-            textArea.select();
-            try {
-                document.execCommand('copy');
+            const licenseKeyText = document.getElementById('licenseKeyDisplay').textContent;
+            navigator.clipboard.writeText(licenseKeyText).then(() => {
                 alert('License key copied to clipboard!');
-            } catch (err) {
-                console.error('Failed to copy text: ', err);
+            }).catch(err => {
+                console.error('Failed to copy license key:', err);
                 alert('Failed to copy license key. Please copy it manually.');
-            }
-            document.body.removeChild(textArea);
+            });
         }
     </script>
 </body>
