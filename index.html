@@ -41,71 +41,6 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
-        /* Custom Modal Styles */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-content {
-            background-color: #1a202c;
-            margin: auto;
-            padding: 30px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            position: relative;
-            animation: fadeIn 0.3s ease-out;
-        }
-        .close-button {
-            color: #aaa;
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close-button:hover,
-        .close-button:focus {
-            color: #e6edf3;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        /* Comparison Table Styles */
-        .comparison-table th, .comparison-table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #30363d;
-        }
-        .comparison-table th {
-            background-color: #1a202c;
-            color: #e6edf3;
-            font-weight: 600;
-        }
-        .comparison-table tbody tr:last-child td {
-            border-bottom: none;
-        }
-        .check-icon {
-            color: #10B981; /* Green check */
-        }
-        .cross-icon {
-            color: #EF4444; /* Red cross */
-        }
     </style>
 </head>
 <body class="antialiased">
@@ -138,10 +73,10 @@
                 Intelligent Automation for Stocks & Options. Maximize Profits, Minimize Manual Effort.
             </p>
             <div class="space-x-4">
-                <button onclick="scrollToSection('pricing')" class="btn-primary text-lg md:text-xl font-semibold py-3 px-8 rounded-lg shadow-lg">
+                <button onclick="window.location.href='product.html?version=full'" class="btn-primary text-lg md:text-xl font-semibold py-3 px-8 rounded-lg shadow-lg">
                     Get the Pro Version
                 </button>
-                <button onclick="scrollToSection('pricing')" class="btn-secondary text-lg md:text-xl font-semibold py-3 px-8 rounded-lg shadow-lg">
+                <button onclick="window.location.href='product.html?version=lite'" class="btn-secondary text-lg md:text-xl font-semibold py-3 px-8 rounded-lg shadow-lg">
                     Get Lite Version
                 </button>
             </div>
@@ -205,7 +140,7 @@
 
             <!-- Feature 6: Comprehensive Risk Management -->
             <div class="feature-card p-6 rounded-lg shadow-xl flex flex-col items-center text-center">
-                <svg class="w-16 h-16 text-orange-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                <svg class="w-16 h-16 text-orange-400 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
                 <h3 class="text-2xl font-semibold mb-3 text-green-300">Comprehensive Risk Management</h3>
                 <p class="text-gray-400 mb-4">Built-in daily profit targets, stop-loss limits, and concurrent trade limits protect your capital.</p>
                 <p class="text-green-200 font-medium italic">
@@ -234,7 +169,7 @@
                     <li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Reconciliation</li>
                     <li class="flex items-center text-gray-500"><svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> No Account-Level Risk Management</li>
                 </ul>
-                <button onclick="showPurchaseModal('lite')" class="btn-secondary text-xl font-semibold py-3 px-10 rounded-lg shadow-lg w-full">
+                <button onclick="window.location.href='product.html?version=lite'" class="btn-secondary text-xl font-semibold py-3 px-10 rounded-lg shadow-lg w-full">
                     Get Now for $49.99
                 </button>
             </div>
@@ -249,7 +184,7 @@
                     <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Unique License Key</li>
                     <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Immediate Download</li>
                 </ul>
-                <button onclick="showPurchaseModal('full')" class="btn-primary text-xl font-semibold py-3 px-10 rounded-lg shadow-lg w-full">
+                <button onclick="window.location.href='product.html?version=full'" class="btn-primary text-xl font-semibold py-3 px-10 rounded-lg shadow-lg w-full">
                     Buy Now for $199.99
                 </button>
             </div>
@@ -262,146 +197,11 @@
         <p>&copy; 2025 TradeBotPro. All rights reserved. Trading involves substantial risk.</p>
     </footer>
 
-    <!-- Purchase Confirmation Modal -->
-    <div id="purchaseModal" class="modal hidden">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal()">&times;</span>
-            <h3 id="modalTitle" class="text-2xl font-bold text-white mb-4"></h3>
-            <p id="modalMessage" class="text-gray-300 mb-6"></p>
-            
-            <!-- PayPal button container -->
-            <div id="paypal-button-container"></div>
-
-        </div>
-    </div>
-
-    <!-- PayPal JavaScript SDK -->
-    <script src="https://www.paypal.com/sdk/js?client-id=AbFAFD99aa0hCnoggRAkKPvSg7i-FBwF1jQvHIqRwIxhgN4nh6fXk_-hxClQj0hCgvbH7m8vT6d2sPHi&currency=USD"></script>
-
     <script>
-        // Set your backend URL here
-        const BACKEND_URL = "https://tradebotpro-backend-553116950013.us-central1.run.app";
-
+        // Function to scroll smoothly to a section
         function scrollToSection(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
-
-        function showPurchaseModal(productType) {
-            const modal = document.getElementById('purchaseModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalMessage = document.getElementById('modalMessage');
-            const paypalButtonContainer = document.getElementById('paypal-button-container');
-
-            // Clear previous PayPal buttons if any
-            paypalButtonContainer.innerHTML = '';
-
-            let title = '';
-            let message = '';
-            
-            if (productType === 'lite') {
-                title = 'Purchase TradeBotPro Lite Version';
-                message = 'You are about to purchase the Lite Version for $49.99. Click the PayPal button to complete your purchase.';
-            } else if (productType === 'full') {
-                title = 'Purchase TradeBotPro Pro Version';
-                message = 'You are about to purchase the Pro Version for $199.99. Click the PayPal button to complete your purchase.';
-            }
-
-            modalTitle.textContent = title;
-            modalMessage.textContent = message;
-            modal.style.display = 'flex'; // Use flex to center content
-
-            // Render PayPal buttons
-            paypal.Buttons({
-                style: {
-                    layout: 'vertical',
-                    color:  'gold',
-                    shape:  'rect',
-                    label:  'paypal'
-                },
-                // Set up the transaction
-                createOrder: function(data, actions) {
-                    return fetch(`${BACKEND_URL}/api/create-paypal-order`, {
-                        method: 'post',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            product: productType // 'lite' or 'full'
-                        })
-                    }).then(function(response) {
-                        if (!response.ok) {
-                            return response.json().then(err => { throw new Error(err.error || 'Failed to create order on backend'); });
-                        }
-                        return response.json();
-                    }).then(function(orderData) {
-                        return orderData.orderID;
-                    }).catch(function(error) {
-                        console.error('Error creating PayPal order:', error);
-                        // Optionally display an error message to the user in the modal
-                        modalMessage.textContent = 'Error initiating payment. Please try again later.';
-                        return actions.reject(); // Prevent PayPal from proceeding
-                    });
-                },
-                // Finalize the transaction
-                onApprove: function(data, actions) {
-                    return fetch(`${BACKEND_URL}/api/capture-paypal-order`, {
-                        method: 'post',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            orderID: data.orderID
-                        })
-                    }).then(function(response) {
-                        if (!response.ok) {
-                            return response.json().then(err => { throw new Error(err.message || 'Failed to capture order on backend'); });
-                        }
-                        return response.json();
-                    }).then(function(captureData) {
-                        console.log('Capture successful:', captureData);
-                        if (captureData.status === 'success') {
-                            // Store data in session storage for the success page
-                            sessionStorage.setItem('tradebotpro_product_type', productType);
-                            sessionStorage.setItem('tradebotpro_license_key', captureData.license_key);
-                            sessionStorage.setItem('tradebotpro_download_url', captureData.download_url);
-                            window.location.href = 'success.html'; // Redirect to success page
-                        } else {
-                            console.error('Payment not completed:', captureData.message);
-                            window.location.href = 'cancelled.html'; // Redirect to cancelled page
-                        }
-                    }).catch(function(error) {
-                        console.error('Error capturing PayPal order:', error);
-                        window.location.href = 'cancelled.html'; // Redirect to cancelled page on error
-                    });
-                },
-                // Handle when the user cancels the payment
-                onCancel: function(data) {
-                    console.log('Payment cancelled by user:', data);
-                    window.location.href = 'cancelled.html'; // Redirect to cancelled page
-                },
-                // Handle any errors that occur during the payment process
-                onError: function(err) {
-                    console.error('PayPal error:', err);
-                    window.location.href = 'cancelled.html'; // Redirect to cancelled page on error
-                }
-            }).render('#paypal-button-container'); // Render the buttons into the div
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('purchaseModal');
-            modal.style.display = 'none';
-        }
-
-        // Close modal if user clicks outside of it
-        window.onclick = function(event) {
-            const modal = document.getElementById('purchaseModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
     </script>
-
 </body>
 </html>
-
-
