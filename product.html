@@ -90,7 +90,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
-            const productType = urlParams.get('product'); // 'full' or 'lite'
+            const productType = urlParams.get('version'); // 'full' or 'lite'
             const productNameDisplay = document.getElementById('product-name-display');
             const purchaseError = document.getElementById('purchase-error');
             const errorMessage = document.getElementById('error-message');
