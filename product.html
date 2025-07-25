@@ -33,282 +33,163 @@
             border: 1px solid #30363d;
             border-radius: 10px;
             padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            max-width: 600px;
+            max-width: 500px;
             width: 90%;
-            margin-top: 5rem; /* Space for fixed header */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .license-key-display {
-            background-color: #2d3748;
+        .text-gradient {
+            background: linear-gradient(90deg, #6366f1, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .btn-primary {
+            @apply bg-indigo-600 text-white font-bold py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-300;
+        }
+        .btn-secondary {
+            @apply bg-gray-700 text-gray-200 font-bold py-2 px-4 rounded-md hover:bg-gray-600 transition duration-300;
+        }
+        .footer {
             padding: 1rem;
-            border-radius: 5px;
-            word-break: break-all;
-            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: #6e7681;
         }
-        .download-button {
-            background-image: linear-gradient(to right, #10B981, #059669); /* Green gradient */
-            transition: all 0.3s ease;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            color: white;
-            margin-top: 1rem;
-            cursor: pointer;
-            display: inline-block; /* For proper padding/margin */
-        }
-        .download-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(16, 185, 129, 0.4);
+        .hidden {
+            display: none;
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="flex flex-col min-h-screen items-center justify-center bg-gray-900 text-gray-100 p-4">
 
-    <!-- Header -->
-    <header class="bg-gray-900 shadow-lg py-4 px-6 flex justify-between items-center fixed w-full z-50">
-        <div class="flex items-center space-x-3">
-            <svg class="w-8 h-8 text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l3 3a1 1 0 001.414-1.414L11 9.586V6z" clip-rule="evenodd"></path>
-            </svg>
-            <h1 class="text-3xl font-bold text-white">TradeBotPro <span class="text-green-400">Pro Version</span></h1>
-        </div>
-        <nav>
-            <a class='text-gray-300 hover:text-white px-4 py-2 rounded-md' href='/#features'>Features</a>
-            <a class='text-gray-300 hover:text-white px-4 py-2 rounded-md' href='/feature_breakdown'>Feature Breakdown</a>
-            <a class='text-gray-300 hover:text-white px-4 py-2 rounded-md' href='/#pricing'>Pricing</a>
-            <a class='text-gray-300 hover:text-white px-4 py-2 rounded-md' href='/help'>Help</a>
-        </nav>
-    </header>
+    <main class="main-content w-full max-w-2xl mx-auto">
+        <div class="card bg-gray-800 border border-gray-700 rounded-lg shadow-lg p-6 md:p-8">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-gradient mb-4">Complete Your Purchase</h1>
+            <p class="text-lg text-gray-300 mb-6" id="product-description">You are about to purchase the <span class="font-semibold" id="product-name-display"></span>.</p>
 
-    <div class="main-content gradient-bg">
-        <div class="card">
-            <h2 id="productTitle" class="text-3xl font-bold text-white mb-4"></h2>
-            <p id="productMessage" class="text-gray-300 mb-6"></p>
-            
-            <!-- PayPal button container -->
             <div id="paypal-button-container" class="mt-8"></div>
 
-            <!-- Loading Spinner -->
-            <div id="loadingSpinner" class="hidden text-center mt-4">
-                <svg class="animate-spin h-8 w-8 text-green-400 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                <p class="text-gray-400 mt-2">Loading payment options...</p>
+            <div id="purchase-error" class="hidden bg-red-800 text-white p-4 rounded-md mt-4">
+                <p class="font-bold">Payment Error:</p>
+                <p id="error-message"></p>
             </div>
-
-            <!-- Success message and download -->
-            <div id="purchaseSuccess" class="hidden mt-8 text-left">
-                <p class="text-green-400 text-xl font-semibold mb-2">Payment Successful!</p>
-                <p class="text-gray-300 mb-2">Thank you for your purchase.</p>
-                <p id="licenseKeyDisplay" class="license-key-display text-lg text-green-200"></p>
-                <button id="downloadButton" class="download-button mt-4">Download TradeBotPro</button>
-                <p class="text-gray-400 text-sm mt-2">Your download should start automatically. If not, click the button above.</p>
-                <p class="text-gray-400 text-sm mt-2">A confirmation email with your license key and download link has also been sent.</p>
+            <div id="purchase-success" class="hidden bg-green-800 text-white p-4 rounded-md mt-4">
+                <p class="font-bold">Payment Successful!</p>
+                <p>Your order has been processed. You will receive an email shortly with your download link and license key.</p>
+                <a href="index.html" class="btn-primary mt-4 inline-block">Go to Home</a>
             </div>
-
-            <!-- Error message -->
-            <div id="purchaseError" class="hidden mt-8 text-left">
-                <p class="text-red-400 text-xl font-semibold mb-2">Payment Error!</p>
-                <p id="errorMessage" class="text-gray-300"></p>
-                <button onclick="window.location.reload()" class="download-button bg-red-600 hover:bg-red-700 mt-4">Try Again</button>
-            </div>
-
         </div>
-    </div>
+    </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 py-8 text-center text-gray-500 text-sm">
-        <p>&copy; 2025 TradeBotPro. All rights reserved. Trading involves substantial risk.</p>
+    <footer class="footer mt-8 text-gray-500">
+        &copy; 2024 TradeBotPro. All rights reserved.
     </footer>
 
-    <!-- PayPal JavaScript SDK -->
-    <script 
-        src="https://www.paypal.com/sdk/js?client-id=AbFAFD99aa0hCnoggRAkKPvSg7i-FBwF1jQvHIqRwIxhgN4nh6fXk_-hxClQj0hCgvbH7m8vT6d2sPHi"
-        data-client-metadata-id="algotbp-website-client"
-        data-page-type="product"
-        data-sdk-integration-source="integrationbuilder"
-    ></script>
-
+    <!-- PayPal SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AbFAFD99aa0hCnoggRAkKPvSg7i-FBwF1jQvHIqRwIxhgN4nh6fXk_-hxClQj0hCgvbH7m8vT6d2sPHi"></script>
     <script>
-        // Set your backend URL here
-        const BACKEND_URL = "https://tradebotpro-backend-553116950013.us-central1.run.app"; // Ensure this matches your deployed backend URL
-
-        const productTitle = document.getElementById('productTitle');
-        const productMessage = document.getElementById('productMessage');
-        const paypalButtonContainer = document.getElementById('paypal-button-container');
-        const loadingSpinner = document.getElementById('loadingSpinner');
-        const purchaseSuccess = document.getElementById('purchaseSuccess');
-        const licenseKeyDisplay = document.getElementById('licenseKeyDisplay');
-        const downloadButton = document.getElementById('downloadButton');
-        const purchaseError = document.getElementById('purchaseError');
-        const errorMessage = document.getElementById('errorMessage');
-
-        let currentProductVersion = ''; // 'lite' or 'full'
-
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
-            currentProductVersion = urlParams.get('version');
+            const productType = urlParams.get('product'); // 'full' or 'lite'
+            const productNameDisplay = document.getElementById('product-name-display');
+            const purchaseError = document.getElementById('purchase-error');
+            const errorMessage = document.getElementById('error-message');
+            const purchaseSuccess = document.getElementById('purchase-success');
 
-            if (currentProductVersion === 'lite') {
-                productTitle.textContent = 'Purchase TradeBotPro Lite Version';
-                productMessage.textContent = 'You are about to purchase the Lite Version for $49.99. Proceed with payment below.';
-            } else if (currentProductVersion === 'full') {
-                productTitle.textContent = 'Purchase TradeBotPro Pro Version';
-                productMessage.textContent = 'You are about to purchase the Pro Version for $199.99. Proceed with payment below.';
+            let displayProductName = '';
+            if (productType === 'full') {
+                displayProductName = 'TradeBotPro Pro Version';
+            } else if (productType === 'lite') {
+                displayProductName = 'TradeBotPro Lite Version';
             } else {
-                productTitle.textContent = 'Product Not Found';
-                productMessage.textContent = 'Please return to the homepage and select a product.';
-                paypalButtonContainer.style.display = 'none'; // Hide PayPal buttons if no product is selected
-                return;
+                displayProductName = 'an unknown product'; // Fallback
+                purchaseError.classList.remove('hidden');
+                errorMessage.textContent = 'Invalid product selected. Please return to the product selection page.';
+                // Optionally hide PayPal buttons if product is invalid
+                document.getElementById('paypal-button-container').classList.add('hidden');
             }
+            productNameDisplay.textContent = displayProductName;
 
-            // Show loading spinner while PayPal SDK loads
-            loadingSpinner.classList.remove('hidden');
-            paypalButtonContainer.classList.add('hidden');
-
-            // Poll for PayPal SDK readiness
-            let paypalLoadAttempts = 0;
-            const MAX_PAYPAL_LOAD_ATTEMPTS = 20; // 20 attempts * 200ms interval = 4 seconds total wait
-
-            function pollForPayPalSdk() {
-                if (typeof paypal !== 'undefined') {
-                    console.log("PayPal SDK confirmed loaded via polling.");
-                    loadingSpinner.classList.add('hidden'); // Hide spinner
-                    paypalButtonContainer.classList.remove('hidden'); // Show button container
-                    renderPayPalButtons(currentProductVersion);
-                } else if (paypalLoadAttempts < MAX_PAYPAL_LOAD_ATTEMPTS) {
-                    paypalLoadAttempts++;
-                    console.warn(`PayPal SDK not yet ready. Still polling... Attempt ${paypalLoadAttempts}/${MAX_PAYPAL_LOAD_ATTEMPTS}`);
-                    setTimeout(pollForPayPalSdk, 200); // Poll every 200ms
-                } else {
-                    console.error("PayPal SDK failed to load after multiple attempts.");
-                    loadingSpinner.classList.add('hidden'); // Hide spinner
-                    purchaseError.classList.remove('hidden'); // Show error message
-                    errorMessage.textContent = 'We are unable to load the payment system. Please check your internet connection or try refreshing the page.';
-                    paypalButtonContainer.innerHTML = ''; // Ensure no buttons are shown
+            if (productType) { // Only render PayPal buttons if productType is valid
+                try {
+                    paypal.Buttons({
+                        // Set up the transaction
+                        createOrder: function(data, actions) {
+                            return fetch('/api/create-paypal-order', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    product: productType // Send the product type to your backend
+                                })
+                            }).then(function(response) {
+                                if (!response.ok) {
+                                    return response.json().then(err => { throw new Error(err.error || 'Failed to create PayPal order on server.'); });
+                                }
+                                return response.json();
+                            }).then(function(orderData) {
+                                return orderData.orderID; // Return the order ID from your backend
+                            }).catch(function(error) {
+                                console.error('Error creating PayPal order:', error);
+                                purchaseError.classList.remove('hidden');
+                                errorMessage.textContent = 'Could not initiate payment: ' + error.message;
+                                return null; // Indicate failure to PayPal SDK
+                            });
+                        },
+                        // Finalize the transaction
+                        onApprove: function(data, actions) {
+                            return actions.order.capture().then(function(details) {
+                                // Send the full capture details to your backend
+                                fetch('/api/capture-paypal-order', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    // CRITICAL CHANGE: Send the 'details' object directly
+                                    body: JSON.stringify(details)
+                                })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        return response.json().then(err => { throw new Error(err.message || 'Server-side capture failed.'); });
+                                    }
+                                    return response.json();
+                                })
+                                .then(captureData => {
+                                    if (captureData.status === 'success') {
+                                        purchaseSuccess.classList.remove('hidden');
+                                        purchaseError.classList.add('hidden');
+                                        // Optionally display download link or license key if returned
+                                        // console.log('Download URL:', captureData.download_url);
+                                        // console.log('License Key:', captureData.license_key);
+                                    } else {
+                                        purchaseError.classList.remove('hidden');
+                                        errorMessage.textContent = 'Payment failed: ' + (captureData.message || 'Unknown error.');
+                                    }
+                                }).catch(function(error) {
+                                    console.error('Error capturing PayPal order:', error);
+                                    purchaseError.classList.remove('hidden');
+                                    errorMessage.textContent = 'An error occurred during payment capture: ' + error.message;
+                                });
+                            });
+                        },
+                        // Handle when the user cancels the payment
+                        onCancel: function(data) {
+                            console.log('Payment cancelled by user:', data);
+                            window.location.href = 'cancel.html'; // Redirect to cancelled page
+                        },
+                        // Handle any errors that occur during the payment process
+                        onError: function(err) {
+                            console.error('PayPal error:', err);
+                            window.location.href = 'cancel.html'; // Redirect to cancelled page on error
+                        }
+                    }).render('#paypal-button-container'); // Render the buttons into the div
+                } catch (e) {
+                    console.error("Error rendering PayPal buttons:", e);
+                    purchaseError.classList.remove('hidden');
+                    errorMessage.textContent = 'There was an unexpected error initializing the payment buttons. Please try again later.';
                 }
             }
-            pollForPayPalSdk(); // Start polling
         });
-
-        function renderPayPalButtons(version) {
-            // Clear any existing buttons to prevent duplicates on re-render
-            paypalButtonContainer.innerHTML = '';
-
-            if (typeof paypal === 'undefined') {
-                console.error("PayPal SDK is still undefined. Cannot render buttons. This is a critical error.");
-                purchaseError.classList.remove('hidden');
-                errorMessage.textContent = 'Payment system is not ready. Please try refreshing the page or check your internet connection.';
-                return;
-            }
-
-            try {
-                paypal.Buttons({
-                    style: {
-                        layout: 'vertical',
-                        color:  'gold',
-                        shape:  'rect',
-                        label:  'paypal'
-                    },
-                    // Set up the transaction
-                    createOrder: function(data, actions) {
-                        return fetch(`${BACKEND_URL}/api/create-paypal-order`, {
-                            method: 'post',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                product: version // 'lite' or 'full'
-                            })
-                        }).then(function(response) {
-                            if (!response.ok) {
-                                return response.json().then(err => { throw new Error(err.error || 'Failed to create order on backend'); });
-                            }
-                            return response.json();
-                        }).then(function(orderData) {
-                            return orderData.orderID;
-                        }).catch(function(error) {
-                            console.error('Error creating PayPal order:', error);
-                            purchaseError.classList.remove('hidden');
-                            errorMessage.textContent = 'Error initiating payment: ' + error.message;
-                            return actions.reject(); // Prevent PayPal from proceeding
-                        });
-                    },
-                    // Finalize the transaction
-                    onApprove: function(data, actions) {
-                        return fetch(`${BACKEND_URL}/api/capture-paypal-order`, {
-                            method: 'post',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                orderID: data.orderID
-                            })
-                        }).then(function(response) {
-                            if (!response.ok) {
-                                return response.json().then(err => { throw new Error(err.message || 'Failed to capture order on backend'); });
-                            }
-                            return response.json();
-                        }).then(function(captureData) {
-                            console.log('Capture successful:', captureData);
-                            if (captureData.status === 'success') {
-                                // Hide PayPal buttons and show success message
-                                paypalButtonContainer.classList.add('hidden');
-                                purchaseSuccess.classList.remove('hidden');
-
-                                if (captureData.licenseKey) {
-                                    licenseKeyDisplay.textContent = 'Your License Key: ' + captureData.licenseKey;
-                                } else {
-                                    licenseKeyDisplay.textContent = 'No license key required for this version.';
-                                }
-
-                                if (captureData.downloadLink) {
-                                    downloadButton.onclick = () => {
-                                        const a = document.createElement('a');
-                                        a.href = captureData.downloadLink;
-                                        a.download = 'TradeBotPro_Download.zip'; // Suggested filename
-                                        document.body.appendChild(a);
-                                        a.click();
-                                        document.body.removeChild(a);
-                                    };
-                                    // Trigger immediate download
-                                    downloadButton.click(); 
-                                } else {
-                                    downloadButton.classList.add('hidden'); // Hide download button if no link
-                                }
-
-                                // Optionally redirect after a delay, or let user stay on page
-                                // setTimeout(() => { window.location.href = 'success.html'; }, 5000); 
-
-                            } else {
-                                console.error('Payment not completed:', captureData.message);
-                                purchaseError.classList.remove('hidden');
-                                errorMessage.textContent = 'Payment failed: ' + (captureData.message || 'Unknown error.');
-                            }
-                        }).catch(function(error) {
-                            console.error('Error capturing PayPal order:', error);
-                            purchaseError.classList.remove('hidden');
-                            errorMessage.textContent = 'An error occurred during payment capture: ' + error.message;
-                        });
-                    },
-                    // Handle when the user cancels the payment
-                    onCancel: function(data) {
-                        console.log('Payment cancelled by user:', data);
-                        window.location.href = 'cancel.html'; // Redirect to cancelled page
-                    },
-                    // Handle any errors that occur during the payment process
-                    onError: function(err) {
-                        console.error('PayPal error:', err);
-                        window.location.href = 'cancel.html'; // Redirect to cancelled page on error
-                    }
-                }).render('#paypal-button-container'); // Render the buttons into the div
-            } catch (e) {
-                console.error("Error rendering PayPal buttons:", e);
-                purchaseError.classList.remove('hidden');
-                errorMessage.textContent = 'There was an unexpected error initializing the payment buttons. Please try again later.';
-            }
-        }
     </script>
 </body>
 </html>
