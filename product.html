@@ -249,24 +249,51 @@
                         },
                         body: JSON.stringify({
                             version: version,
-                            product_type: product.productType,
+                            productType: product.productType,
                             name: product.name,
-                            price: product.price,
+                            price: parseFloat(product.price),
                             currency: 'USD'
                         })
                     });
 
                     if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(errorData.error || 'Failed to create order');
+                        let errorMessage = 'Failed to create order';
+                        try {
+                            const errorData = await response.json();
+                            errorMessage = errorData.error || errorData.message || errorMessage;
+                        } catch (parseError) {
+                            console.warn('Could not parse error response:', parseError);
+                            errorMessage = `Server error (${response.status}): ${response.statusText}`;
+                        }
+                        throw new Error(errorMessage);
                     }
 
                     const orderData = await response.json();
+                    
+                    if (!orderData.orderID) {
+                        throw new Error('Invalid response from server: missing order ID');
+                    }
+                    
                     return orderData.orderID;
                 } catch (err) {
                     console.error('Order creation failed:', err);
-                    document.getElementById('purchase-error').classList.remove('hidden');
-                    document.getElementById('error-message').textContent = err.message;
+                    
+                    // Show error message to user
+                    const errorElement = document.getElementById('purchase-error');
+                    const errorMessageElement = document.getElementById('error-message');
+                    
+                    errorElement.style.display = 'block';
+                    errorElement.classList.remove('hidden');
+                    
+                    // Provide user-friendly error messages
+                    if (err.message.includes('network') || err.message.includes('fetch')) {
+                        errorMessageElement.textContent = 'Network error. Please check your connection and try again.';
+                    } else if (err.message.includes('Invalid version')) {
+                        errorMessageElement.textContent = 'Invalid product selection. Please go back and try again.';
+                    } else {
+                        errorMessageElement.textContent = err.message || 'An unexpected error occurred. Please try again.';
+                    }
+                    
                     throw err;
                 } finally {
                     document.getElementById('loading').style.display = 'none';
@@ -277,6 +304,13 @@
                 try {
                     document.getElementById('loading').style.display = 'flex';
                     
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const version = urlParams.get('version');
+                    
+                    if (!version || !PRODUCTS[version]) {
+                        throw new Error('Invalid product version');
+                    }
+                    
                     const response = await fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/capture-paypal-order', {
                         method: 'POST',
                         headers: {
@@ -284,22 +318,48 @@
                         },
                         body: JSON.stringify({
                             orderID: data.orderID,
-                            version: new URLSearchParams(window.location.search).get('version')
+                            version: version,
+                            paymentID: data.paymentID || null,
+                            payerID: data.payerID || null
                         })
                     });
 
                     if (!response.ok) {
-                        throw new Error('Payment capture failed');
+                        let errorMessage = 'Payment capture failed';
+                        try {
+                            const errorData = await response.json();
+                            errorMessage = errorData.error || errorData.message || errorMessage;
+                        } catch (parseError) {
+                            console.warn('Could not parse error response:', parseError);
+                            errorMessage = `Server error (${response.status}): ${response.statusText}`;
+                        }
+                        throw new Error(errorMessage);
                     }
 
                     const captureData = await response.json();
                     
-                    // Store success data
+                    // Validate response data
+                    if (!captureData || typeof captureData !== 'object') {
+                        throw new Error('Invalid response from server');
+                    }
+                    
+                    // Store success data with additional info for success page
                     sessionStorage.setItem('tradebotpro_purchase', JSON.stringify({
                         orderID: data.orderID,
-                        downloadUrl: captureData.downloadUrl,
-                        licenseKey: captureData.licenseKey
+                        downloadUrl: captureData.downloadUrl || null,
+                        licenseKey: captureData.licenseKey || null,
+                        version: version,
+                        productName: PRODUCTS[version].name
                     }));
+
+                    // Also store individual items for backward compatibility
+                    if (captureData.downloadUrl) {
+                        sessionStorage.setItem('tradebotpro_download_url', captureData.downloadUrl);
+                    }
+                    if (captureData.licenseKey) {
+                        sessionStorage.setItem('tradebotpro_license_key', captureData.licenseKey);
+                    }
+                    sessionStorage.setItem('tradebotpro_product_type', version);
 
                     // Show success message briefly before redirect
                     document.getElementById('payment-success').style.display = 'block';
@@ -309,21 +369,50 @@
 
                 } catch (err) {
                     console.error('Payment capture failed:', err);
-                    document.getElementById('purchase-error').classList.remove('hidden');
-                    document.getElementById('error-message').textContent = 'Payment processing failed. Please try again.';
+                    
+                    // Show error message to user
+                    const errorElement = document.getElementById('purchase-error');
+                    const errorMessageElement = document.getElementById('error-message');
+                    
+                    errorElement.style.display = 'block';
+                    errorElement.classList.remove('hidden');
+                    
+                    // Provide user-friendly error messages
+                    if (err.message.includes('network') || err.message.includes('fetch')) {
+                        errorMessageElement.textContent = 'Network error during payment processing. Please contact support if the payment was charged.';
+                    } else if (err.message.includes('Invalid product version')) {
+                        errorMessageElement.textContent = 'Invalid product selection. Please go back and try again.';
+                    } else {
+                        errorMessageElement.textContent = err.message || 'Payment processing failed. Please try again.';
+                    }
                 } finally {
                     document.getElementById('loading').style.display = 'none';
                 }
             },
 
-            onCancel: function() {
+            onCancel: function(data) {
+                // Log cancellation for analytics if needed
+                console.log('Payment cancelled by user');
+                
+                // Redirect to cancel page
                 window.location.href = '/cancel.html';
             },
 
             onError: function(err) {
                 console.error('PayPal error:', err);
-                document.getElementById('purchase-error').classList.remove('hidden');
-                document.getElementById('error-message').textContent = 'Payment processing failed. Please try again.';
+                
+                // Show error message to user
+                const errorElement = document.getElementById('purchase-error');
+                const errorMessageElement = document.getElementById('error-message');
+                
+                errorElement.style.display = 'block';
+                errorElement.classList.remove('hidden');
+                
+                // Provide user-friendly error message
+                errorMessageElement.textContent = 'PayPal payment processing failed. Please try again or use a different payment method.';
+                
+                // Hide loading indicator if shown
+                document.getElementById('loading').style.display = 'none';
             }
         }).render('#paypal-button-container');
 
@@ -334,26 +423,86 @@
             
             if (version && PRODUCTS[version]) {
                 const product = PRODUCTS[version];
-                document.getElementById('product-info').textContent = product.name;
-                document.getElementById('price-display').textContent = `$${product.price} USD`;
-
-                // Populate features list
-                const featuresList = document.getElementById('features-list');
-                featuresList.innerHTML = product.features
-                    .map(feature => `<li>${feature}</li>`)
-                    .join('');
+                
+                // Safely update DOM elements
+                const productInfoElement = document.getElementById('product-info');
+                const priceDisplayElement = document.getElementById('price-display');
+                const featuresListElement = document.getElementById('features-list');
+                
+                if (productInfoElement) {
+                    productInfoElement.textContent = product.name;
+                }
+                if (priceDisplayElement) {
+                    priceDisplayElement.textContent = `$${product.price} USD`;
+                }
+                
+                // Populate features list safely
+                if (featuresListElement && product.features) {
+                    featuresListElement.innerHTML = product.features
+                        .map(feature => `<li>${feature}</li>`)
+                        .join('');
+                }
             } else {
-                window.location.href = '/'; // Redirect to home if invalid version
+                // Show error message instead of immediate redirect to give user context
+                const errorElement = document.getElementById('purchase-error');
+                const errorMessageElement = document.getElementById('error-message');
+                
+                if (errorElement && errorMessageElement) {
+                    errorElement.style.display = 'block';
+                    errorMessageElement.textContent = 'Invalid product selection. Please select a valid product from the homepage.';
+                }
+                
+                // Redirect after showing error message
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 3000);
             }
         });
 
-        // Global error handling
+        // Enhanced global error handling
         window.onerror = function(msg, url, line, col, error) {
             console.error('Global error:', { msg, url, line, col, error });
-            document.getElementById('purchase-error').classList.remove('hidden');
-            document.getElementById('error-message').textContent = 'An unexpected error occurred. Please try again later.';
+            
+            const errorElement = document.getElementById('purchase-error');
+            const errorMessageElement = document.getElementById('error-message');
+            
+            if (errorElement && errorMessageElement) {
+                errorElement.style.display = 'block';
+                errorElement.classList.remove('hidden');
+                errorMessageElement.textContent = 'An unexpected error occurred. Please refresh the page and try again.';
+            }
+            
+            // Hide loading indicator if shown
+            const loadingElement = document.getElementById('loading');
+            if (loadingElement) {
+                loadingElement.style.display = 'none';
+            }
+            
             return false;
         };
+
+        // Handle unhandled promise rejections
+        window.addEventListener('unhandledrejection', function(event) {
+            console.error('Unhandled promise rejection:', event.reason);
+            
+            const errorElement = document.getElementById('purchase-error');
+            const errorMessageElement = document.getElementById('error-message');
+            
+            if (errorElement && errorMessageElement) {
+                errorElement.style.display = 'block';
+                errorElement.classList.remove('hidden');
+                errorMessageElement.textContent = 'An error occurred during payment processing. Please try again.';
+            }
+            
+            // Hide loading indicator if shown
+            const loadingElement = document.getElementById('loading');
+            if (loadingElement) {
+                loadingElement.style.display = 'none';
+            }
+            
+            // Prevent the default browser handling
+            event.preventDefault();
+        });
     </script>
 </body>
 </html>
