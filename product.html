@@ -115,14 +115,37 @@
                     paypal.Buttons({
                         // Set up the transaction
                         createOrder: function(data, actions) {
-                            return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/create-paypal-order', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({
-                                    version: version // Send the product type to your backend
-                                })
+    return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/create-paypal-order', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            version: version,
+            productType: version // Include both for compatibility
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(err => { 
+                throw new Error(err.error || 'Failed to create PayPal order.'); 
+            });
+        }
+        return response.json();
+    })
+    .then(orderData => {
+        if (!orderData.orderID) {
+            throw new Error('Invalid order response from server');
+        }
+        return orderData.orderID;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        purchaseError.classList.remove('hidden');
+        errorMessage.textContent = error.message;
+        throw error; // Re-throw to stop PayPal flow
+    });
+}
                             }).then(function(response) {
                                 if (!response.ok) {
                                     return response.json().then(err => { throw new Error(err.error || 'Failed to create PayPal order on server.'); });
