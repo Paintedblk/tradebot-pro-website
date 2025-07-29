@@ -189,9 +189,10 @@
         // Product Configuration
         const PRODUCTS = {
             'lite': {
-                name: 'TradeBotPro Lite Version',
-                price: '49.99',
-                productType: 'digital_goods',
+                name: 'TradebotPro Lite Version',
+                price: '49.00',
+                productType: 'DIGITAL_GOODS',
+                file: 'tradebotpro_lite.zip',
                 features: [
                     'Basic trading algorithms',
                     'Market data analysis',
@@ -201,9 +202,10 @@
                 ]
             },
             'full': {
-                name: 'TradeBotPro Pro Version',
+                name: 'TradebotPro Full Version',
                 price: '199.99',
-                productType: 'digital_goods',
+                productType: 'DIGITAL_GOODS',
+                file: 'Tradebotpro.zip',
                 features: [
                     'Advanced trading algorithms',
                     'AI-powered market analysis',
@@ -252,6 +254,7 @@
                             product_type: product.productType,
                             name: product.name,
                             price: product.price,
+                            file: product.file,
                             currency: 'USD'
                         })
                     });
