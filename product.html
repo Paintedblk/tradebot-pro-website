@@ -90,16 +90,16 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
-            const productType = urlParams.get('version'); // 'full' or 'lite'
+            const version = urlParams.get('version'); // 'full' or 'lite'
             const productNameDisplay = document.getElementById('product-name-display');
             const purchaseError = document.getElementById('purchase-error');
             const errorMessage = document.getElementById('error-message');
             const purchaseSuccess = document.getElementById('purchase-success');
 
             let displayProductName = '';
-            if (productType === 'full') {
+            if (version === 'full') {
                 displayProductName = 'TradeBotPro Pro Version';
-            } else if (productType === 'lite') {
+            } else if (version === 'lite') {
                 displayProductName = 'TradeBotPro Lite Version';
             } else {
                 displayProductName = 'an unknown product'; // Fallback
@@ -110,7 +110,7 @@
             }
             productNameDisplay.textContent = displayProductName;
 
-            if (productType) { // Only render PayPal buttons if productType is valid
+            if (version) { // Only render PayPal buttons if version is valid
                 try {
                     paypal.Buttons({
                         // Set up the transaction
@@ -121,7 +121,7 @@
                                     'Content-Type': 'application/json'
                                 },
                                 body: JSON.stringify({
-                                    version: productType // Send the product type to your backend
+                                    version: version // Send the product type to your backend
                                 })
                             }).then(function(response) {
                                 if (!response.ok) {
