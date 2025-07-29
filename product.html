@@ -95,6 +95,9 @@
             const errorMessage = document.getElementById('error-message');
             const purchaseSuccess = document.getElementById('purchase-success');
 
+            // Debug logging
+            console.log('Version from URL:', version);
+
             let displayProductName = '';
             if (version === 'full') {
                 displayProductName = 'TradeBotPro Pro Version';
@@ -106,26 +109,30 @@
                 errorMessage.textContent = 'Invalid product selected. Please return to the product selection page.';
                 document.getElementById('paypal-button-container').classList.add('hidden');
             }
+
+            // Debug logging
+            console.log('Product name:', displayProductName);
+            
             productNameDisplay.textContent = displayProductName;
 
-            if (version) {
+            if (version && (version === 'full' || version === 'lite')) {
                 try {
                     paypal.Buttons({
                         createOrder: function(data, actions) {
+                            console.log('Creating PayPal order for version:', version);
                             return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/create-paypal-order', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
                                 body: JSON.stringify({
-                                    version: version,
-                                    productType: version
+                                    version: version
                                 })
                             })
                             .then(response => {
                                 if (!response.ok) {
                                     return response.json().then(err => { 
-                                        throw new Error(err.error || 'Failed to create PayPal order.'); 
+                                        throw new Error(err.error || err.message || 'Failed to create PayPal order.'); 
                                     });
                                 }
                                 return response.json();
@@ -134,6 +141,7 @@
                                 if (!orderData.orderID) {
                                     throw new Error('Invalid order response from server');
                                 }
+                                console.log('Order created:', orderData);
                                 return orderData.orderID;
                             })
                             .catch(error => {
@@ -144,6 +152,7 @@
                             });
                         },
                         onApprove: function(data, actions) {
+                            console.log('Payment approved. Processing...');
                             return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/capture-paypal-order', {
                                 method: 'POST',
                                 headers: {
@@ -163,6 +172,7 @@
                                 return response.json();
                             })
                             .then(captureData => {
+                                console.log('Capture response:', captureData);
                                 if (captureData.status === 'success') {
                                     // Store the data for the success page
                                     sessionStorage.setItem('tradebotpro_product_type', version);
