@@ -5,14 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TradeBotPro - Complete Your Purchase</title>
     
-    <!-- Replace CDN with compiled Tailwind -->
+    <!-- Tailwind CSS -->
     <link href="/dist/output.css" rel="stylesheet">
     
     <style>
         /* Critical CSS */
+        :root {
+            --primary-color: #2563eb;
+            --success-color: #059669;
+            --error-color: #dc2626;
+        }
+
+        body {
+            background-color: #111827;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .payment-container {
+            background-color: #1f2937;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
         .payment-error {
             display: none;
-            background-color: #dc2626;
+            background-color: var(--error-color);
             color: white;
             padding: 1rem;
             border-radius: 0.375rem;
@@ -21,7 +44,7 @@
         
         .payment-success {
             display: none;
-            background-color: #059669;
+            background-color: var(--success-color);
             color: white;
             padding: 1rem;
             border-radius: 0.375rem;
@@ -33,11 +56,18 @@
             align-items: center;
             justify-content: center;
             padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 50;
         }
 
         .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: #3498db;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left-color: var(--primary-color);
             border-radius: 50%;
             width: 30px;
             height: 30px;
@@ -47,36 +77,108 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        /* Product Details */
+        .product-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .product-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .product-info {
+            font-size: 1.25rem;
+            color: #9ca3af;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #34d399;
+            margin: 0.5rem 0;
+        }
+
+        /* PayPal Button Container */
+        #paypal-button-container {
+            margin-top: 2rem;
+        }
+
+        /* Features List */
+        .features-list {
+            margin: 2rem 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .features-list li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            color: var(--success-color);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 640px) {
+            .payment-container {
+                padding: 1rem;
+            }
+
+            .product-title {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen">
-    <div id="app" class="container mx-auto px-4 py-8">
-        <header class="text-center mb-12">
-            <h1 class="text-4xl font-bold mb-4">Complete Your Purchase</h1>
-            <div id="product-info" class="text-xl text-gray-300"></div>
-            <div id="price-display" class="text-2xl font-bold text-green-500 mt-2"></div>
-        </header>
-
-        <main class="max-w-md mx-auto">
-            <div class="bg-gray-800 rounded-lg p-6 shadow-lg">
-                <div id="loading" class="loading">
-                    <div class="spinner mr-3"></div>
-                    <span>Processing...</span>
+<body>
+    <div class="min-h-screen py-8">
+        <div class="container mx-auto px-4">
+            <main class="max-w-2xl mx-auto">
+                <!-- Product Information -->
+                <div class="product-header">
+                    <h1 class="product-title">Complete Your Purchase</h1>
+                    <div id="product-info" class="product-info"></div>
+                    <div id="price-display" class="product-price"></div>
                 </div>
 
-                <div id="paypal-button-container"></div>
+                <!-- Payment Container -->
+                <div class="payment-container">
+                    <div id="loading" class="loading">
+                        <div class="spinner"></div>
+                        <span class="ml-3">Processing your payment...</span>
+                    </div>
 
-                <div id="payment-error" class="payment-error">
-                    <strong>Error:</strong>
-                    <span id="error-message"></span>
-                </div>
+                    <!-- Features List -->
+                    <ul class="features-list" id="features-list">
+                        <!-- Features will be populated by JavaScript -->
+                    </ul>
 
-                <div id="payment-success" class="payment-success">
-                    <strong>Success!</strong>
-                    <p>Your purchase has been completed. You will receive an email with your license key and download instructions.</p>
+                    <!-- PayPal Buttons -->
+                    <div id="paypal-button-container"></div>
+
+                    <!-- Error Message -->
+                    <div id="purchase-error" class="payment-error">
+                        <strong>Error:</strong>
+                        <span id="error-message"></span>
+                    </div>
+
+                    <!-- Success Message -->
+                    <div id="payment-success" class="payment-success">
+                        <strong>Success!</strong>
+                        <p>Your purchase has been completed. You will receive an email with your license key and download instructions.</p>
+                    </div>
                 </div>
-            </div>
-        </main>
+            </main>
+        </div>
     </div>
 
     <!-- PayPal SDK -->
@@ -84,188 +186,172 @@
     
     <!-- App Logic -->
     <script>
-        // Constants
-        const BACKEND_URL = 'https://tradebotpro-backend-553116950013.us-central1.run.app';
+        // Product Configuration
         const PRODUCTS = {
-            lite: {
+            'lite': {
                 name: 'TradeBotPro Lite Version',
-                price: '49.99'
+                price: '49.99',
+                productType: 'digital_goods',
+                features: [
+                    'Basic trading algorithms',
+                    'Market data analysis',
+                    'Real-time notifications',
+                    'Single exchange support',
+                    '24/7 email support'
+                ]
             },
-            full: {
+            'full': {
                 name: 'TradeBotPro Pro Version',
-                price: '199.99'
+                price: '199.99',
+                productType: 'digital_goods',
+                features: [
+                    'Advanced trading algorithms',
+                    'AI-powered market analysis',
+                    'Multi-exchange support',
+                    'Priority 24/7 support',
+                    'Custom strategy builder',
+                    'Portfolio management',
+                    'Risk management tools',
+                    'API access'
+                ]
             }
         };
 
-        // State management
-        const state = {
-            version: null,
-            orderID: null,
-            loading: false,
-            error: null
-        };
+        // Initialize PayPal buttons
+        paypal.Buttons({
+            style: {
+                layout: 'vertical',
+                color: 'gold',
+                shape: 'rect',
+                label: 'pay'
+            },
 
-        // UI Elements
-        const elements = {
-            productInfo: document.getElementById('product-info'),
-            priceDisplay: document.getElementById('price-display'),
-            paypalContainer: document.getElementById('paypal-button-container'),
-            loading: document.getElementById('loading'),
-            error: document.getElementById('payment-error'),
-            errorMessage: document.getElementById('error-message'),
-            success: document.getElementById('payment-success')
-        };
+            createOrder: async function(data, actions) {
+                try {
+                    // Show loading state
+                    document.getElementById('loading').style.display = 'flex';
+                    
+                    // Get version from URL
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const version = urlParams.get('version');
+                    
+                    if (!version || !PRODUCTS[version]) {
+                        throw new Error('Invalid version parameter');
+                    }
 
-        // Utility functions
-        const showError = (message) => {
-            elements.error.style.display = 'block';
-            elements.errorMessage.textContent = message;
-            elements.loading.style.display = 'none';
-        };
+                    const product = PRODUCTS[version];
 
-        const showLoading = () => {
-            elements.loading.style.display = 'flex';
-            elements.error.style.display = 'none';
-            elements.paypalContainer.style.opacity = '0.5';
-        };
+                    // Create order with backend
+                    const response = await fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/create-paypal-order', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            version: version,
+                            product_type: product.productType,
+                            name: product.name,
+                            price: product.price,
+                            currency: 'USD'
+                        })
+                    });
 
-        const hideLoading = () => {
-            elements.loading.style.display = 'none';
-            elements.paypalContainer.style.opacity = '1';
-        };
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || 'Failed to create order');
+                    }
 
-        const validateVersion = (version) => {
-            return version && PRODUCTS[version];
-        };
+                    const orderData = await response.json();
+                    return orderData.orderID;
+                } catch (err) {
+                    console.error('Order creation failed:', err);
+                    document.getElementById('purchase-error').classList.remove('hidden');
+                    document.getElementById('error-message').textContent = err.message;
+                    throw err;
+                } finally {
+                    document.getElementById('loading').style.display = 'none';
+                }
+            },
 
-        // Initialize the page
-        const init = () => {
-            // Get version from URL
+            onApprove: async function(data, actions) {
+                try {
+                    document.getElementById('loading').style.display = 'flex';
+                    
+                    const response = await fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/capture-paypal-order', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            orderID: data.orderID,
+                            version: new URLSearchParams(window.location.search).get('version')
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Payment capture failed');
+                    }
+
+                    const captureData = await response.json();
+                    
+                    // Store success data
+                    sessionStorage.setItem('tradebotpro_purchase', JSON.stringify({
+                        orderID: data.orderID,
+                        downloadUrl: captureData.downloadUrl,
+                        licenseKey: captureData.licenseKey
+                    }));
+
+                    // Show success message briefly before redirect
+                    document.getElementById('payment-success').style.display = 'block';
+                    setTimeout(() => {
+                        window.location.href = '/success.html';
+                    }, 2000);
+
+                } catch (err) {
+                    console.error('Payment capture failed:', err);
+                    document.getElementById('purchase-error').classList.remove('hidden');
+                    document.getElementById('error-message').textContent = 'Payment processing failed. Please try again.';
+                } finally {
+                    document.getElementById('loading').style.display = 'none';
+                }
+            },
+
+            onCancel: function() {
+                window.location.href = '/cancel.html';
+            },
+
+            onError: function(err) {
+                console.error('PayPal error:', err);
+                document.getElementById('purchase-error').classList.remove('hidden');
+                document.getElementById('error-message').textContent = 'Payment processing failed. Please try again.';
+            }
+        }).render('#paypal-button-container');
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const version = urlParams.get('version');
+            
+            if (version && PRODUCTS[version]) {
+                const product = PRODUCTS[version];
+                document.getElementById('product-info').textContent = product.name;
+                document.getElementById('price-display').textContent = `$${product.price} USD`;
 
-            if (!validateVersion(version)) {
-                showError('Invalid product version. Please return to the product selection page.');
-                return false;
+                // Populate features list
+                const featuresList = document.getElementById('features-list');
+                featuresList.innerHTML = product.features
+                    .map(feature => `<li>${feature}</li>`)
+                    .join('');
+            } else {
+                window.location.href = '/'; // Redirect to home if invalid version
             }
-
-            state.version = version;
-            const product = PRODUCTS[version];
-
-            // Update UI
-            elements.productInfo.textContent = product.name;
-            elements.priceDisplay.textContent = `$${product.price} USD`;
-
-            return true;
-        };
-
-        // PayPal integration
-        const initializePayPal = () => {
-            if (!state.version) return;
-
-            const product = PRODUCTS[state.version];
-
-            paypal.Buttons({
-                createOrder: async () => {
-                    try {
-                        showLoading();
-
-                        const response = await fetch(`${BACKEND_URL}/api/create-paypal-order`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                version: state.version,
-                                timestamp: Date.now()
-                            })
-                        });
-
-                        if (!response.ok) {
-                            const errorData = await response.json();
-                            throw new Error(errorData.error || 'Failed to create order');
-                        }
-
-                        const orderData = await response.json();
-                        state.orderID = orderData.orderID;
-                        return orderData.orderID;
-                    } catch (error) {
-                        console.error('Order creation failed:', error);
-                        showError(error.message);
-                        throw error;
-                    } finally {
-                        hideLoading();
-                    }
-                },
-
-                onApprove: async (data, actions) => {
-                    try {
-                        showLoading();
-
-                        const response = await fetch(`${BACKEND_URL}/api/capture-paypal-order`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                orderID: data.orderID,
-                                version: state.version
-                            })
-                        });
-
-                        if (!response.ok) {
-                            const errorData = await response.json();
-                            throw new Error(errorData.error || 'Failed to capture payment');
-                        }
-
-                        const captureData = await response.json();
-                        
-                        // Store success data
-                        sessionStorage.setItem('tradebotpro_purchase_data', JSON.stringify({
-                            orderID: data.orderID,
-                            version: state.version,
-                            licenseKey: captureData.licenseKey,
-                            downloadUrl: captureData.downloadUrl
-                        }));
-
-                        // Show success and redirect
-                        elements.success.style.display = 'block';
-                        setTimeout(() => {
-                            window.location.href = '/success.html';
-                        }, 2000);
-
-                    } catch (error) {
-                        console.error('Payment capture failed:', error);
-                        showError(error.message);
-                    } finally {
-                        hideLoading();
-                    }
-                },
-
-                onCancel: () => {
-                    window.location.href = '/cancel.html';
-                },
-
-                onError: (err) => {
-                    console.error('PayPal error:', err);
-                    showError('Payment processing failed. Please try again.');
-                }
-            }).render('#paypal-button-container')
-              .catch(error => {
-                  console.error('PayPal button render failed:', error);
-                  showError('Failed to initialize payment system. Please refresh the page.');
-              });
-        };
-
-        // Start the app
-        if (init()) {
-            initializePayPal();
-        }
+        });
 
         // Global error handling
-        window.onerror = (msg, url, line, col, error) => {
+        window.onerror = function(msg, url, line, col, error) {
             console.error('Global error:', { msg, url, line, col, error });
-            showError('An unexpected error occurred. Please refresh the page or try again later.');
+            document.getElementById('purchase-error').classList.remove('hidden');
+            document.getElementById('error-message').textContent = 'An unexpected error occurred. Please try again later.';
             return false;
         };
     </script>
