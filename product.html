@@ -119,38 +119,42 @@
                 try {
                     paypal.Buttons({
                         createOrder: function(data, actions) {
-                            console.log('Creating PayPal order for version:', version);
-                            return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/create-paypal-order', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({
-                                    version: version
-                                })
-                            })
-                            .then(response => {
-                                if (!response.ok) {
-                                    return response.json().then(err => { 
-                                        throw new Error(err.error || err.message || 'Failed to create PayPal order.'); 
-                                    });
-                                }
-                                return response.json();
-                            })
-                            .then(orderData => {
-                                if (!orderData.orderID) {
-                                    throw new Error('Invalid order response from server');
-                                }
-                                console.log('Order created:', orderData);
-                                return orderData.orderID;
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                                purchaseError.classList.remove('hidden');
-                                errorMessage.textContent = error.message;
-                                throw error;
-                            });
-                        },
+    const requestData = {
+        version: version
+    };
+    console.log('Sending request data:', requestData);
+    
+    return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/create-paypal-order', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestData)
+    })
+    .then(response => {
+        console.log('Raw response:', response);
+        if (!response.ok) {
+            return response.json().then(err => { 
+                console.error('Error response:', err);
+                throw new Error(err.error || err.message || 'Failed to create PayPal order.'); 
+            });
+        }
+        return response.json();
+    })
+    .then(orderData => {
+        console.log('Success response:', orderData);
+        if (!orderData.orderID) {
+            throw new Error('Invalid order response from server');
+        }
+        return orderData.orderID;
+    })
+    .catch(error => {
+        console.error('Request error:', error);
+        purchaseError.classList.remove('hidden');
+        errorMessage.textContent = error.message;
+        throw error;
+    });
+},
                         onApprove: function(data, actions) {
                             console.log('Payment approved. Processing...');
                             return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/capture-paypal-order', {
