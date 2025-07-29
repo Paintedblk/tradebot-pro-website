@@ -10,8 +10,8 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d1117; /* Dark background for a professional tech feel */
-            color: #e6edf3; /* Light text for contrast */
+            background-color: #0d1117;
+            color: #e6edf3;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -20,7 +20,7 @@
             background: linear-gradient(135deg, #1a202c, #2d3748);
         }
         .main-content {
-            flex: 1; /* Allows main content to grow and push footer down */
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -85,7 +85,6 @@
     </footer>
 
     <!-- PayPal SDK -->
-    <!-- IMPORTANT: Replace YOUR_PAYPAL_CLIENT_ID_HERE with your actual PayPal client ID -->
     <script src="https://www.paypal.com/sdk/js?client-id=AbFAFD99aa0hCnoggRAkKPvSg7i-FBwF1jQvHIqRwIxhgN4nh6fXk_-hxClQj0hCgvbH7m8vT6d2sPHi"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -102,132 +101,99 @@
             } else if (version === 'lite') {
                 displayProductName = 'TradeBotPro Lite Version';
             } else {
-                displayProductName = 'an unknown product'; // Fallback
+                displayProductName = 'an unknown product';
                 purchaseError.classList.remove('hidden');
                 errorMessage.textContent = 'Invalid product selected. Please return to the product selection page.';
-                // Optionally hide PayPal buttons if product is invalid
                 document.getElementById('paypal-button-container').classList.add('hidden');
             }
             productNameDisplay.textContent = displayProductName;
 
-            if (version) { // Only render PayPal buttons if version is valid
+            if (version) {
                 try {
                     paypal.Buttons({
-                        // Set up the transaction
                         createOrder: function(data, actions) {
-    return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/create-paypal-order', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            version: version,
-            productType: version // Include both for compatibility
-        })
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.json().then(err => { 
-                throw new Error(err.error || 'Failed to create PayPal order.'); 
-            });
-        }
-        return response.json();
-    })
-    .then(orderData => {
-        if (!orderData.orderID) {
-            throw new Error('Invalid order response from server');
-        }
-        return orderData.orderID;
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        purchaseError.classList.remove('hidden');
-        errorMessage.textContent = error.message;
-        throw error; // Re-throw to stop PayPal flow
-    });
-}
-                            }).then(function(response) {
+                            return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/create-paypal-order', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    version: version,
+                                    productType: version
+                                })
+                            })
+                            .then(response => {
                                 if (!response.ok) {
-                                    return response.json().then(err => { throw new Error(err.error || 'Failed to create PayPal order on server.'); });
+                                    return response.json().then(err => { 
+                                        throw new Error(err.error || 'Failed to create PayPal order.'); 
+                                    });
                                 }
                                 return response.json();
-                            }).then(function(orderData) {
-                                return orderData.orderID; // Return the order ID from your backend
-                            }).catch(function(error) {
-                                console.error('Error creating PayPal order:', error);
+                            })
+                            .then(orderData => {
+                                if (!orderData.orderID) {
+                                    throw new Error('Invalid order response from server');
+                                }
+                                return orderData.orderID;
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
                                 purchaseError.classList.remove('hidden');
-                                errorMessage.textContent = 'Could not initiate payment: ' + error.message;
-                                return null; // Indicate failure to PayPal SDK
+                                errorMessage.textContent = error.message;
+                                throw error;
                             });
                         },
-                        // Finalize the transaction
-                       onApprove: function(data, actions) {
-    // Don't capture here, just send the orderID to your backend
-    return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/capture-paypal-order', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            orderID: data.orderID,
-            version: version
-        })
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.json().then(err => { throw new Error(err.message || 'Server-side capture failed.'); });
-        }
-        return response.json();
-    })
-    .then(captureData => {
-        if (captureData.status === 'success') {
-            purchaseSuccess.classList.remove('hidden');
-            purchaseError.classList.add('hidden');
-        } else {
-            throw new Error(captureData.message || 'Payment capture failed');
-        }
-    })
-    .catch(error => {
-        console.error('Payment error:', error);
-        purchaseError.classList.remove('hidden');
-        errorMessage.textContent = error.message;
-    });
-}
-                                .then(response => {
-                                    if (!response.ok) {
-                                        return response.json().then(err => { throw new Error(err.message || 'Server-side capture failed.'); });
-                                    }
-                                    return response.json();
+                        onApprove: function(data, actions) {
+                            return fetch('https://tradebotpro-backend-553116950013.us-central1.run.app/api/capture-paypal-order', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    orderID: data.orderID,
+                                    version: version
                                 })
-                                .then(captureData => {
-                                    if (captureData.status === 'success') {
-                                        purchaseSuccess.classList.remove('hidden');
-                                        purchaseError.classList.add('hidden');
-                                        // Optionally display download link or license key if returned
-                                        // console.log('Download URL:', captureData.download_url);
-                                        // console.log('License Key:', captureData.license_key);
-                                    } else {
-                                        purchaseError.classList.remove('hidden');
-                                        errorMessage.textContent = 'Payment failed: ' + (captureData.message || 'Unknown error.');
-                                    }
-                                }).catch(function(error) {
-                                    console.error('Error capturing PayPal order:', error);
-                                    purchaseError.classList.remove('hidden');
-                                    errorMessage.textContent = 'An error occurred during payment capture: ' + error.message;
-                                });
+                            })
+                            .then(response => {
+                                if (!response.ok) {
+                                    return response.json().then(err => { 
+                                        throw new Error(err.message || 'Server-side capture failed.'); 
+                                    });
+                                }
+                                return response.json();
+                            })
+                            .then(captureData => {
+                                if (captureData.status === 'success') {
+                                    // Store the data for the success page
+                                    sessionStorage.setItem('tradebotpro_product_type', version);
+                                    sessionStorage.setItem('tradebotpro_license_key', captureData.licenseKey);
+                                    sessionStorage.setItem('tradebotpro_download_url', captureData.downloadLink);
+                                    
+                                    // Show success message
+                                    purchaseSuccess.classList.remove('hidden');
+                                    purchaseError.classList.add('hidden');
+                                    
+                                    // Redirect to success page
+                                    window.location.href = 'success.html';
+                                } else {
+                                    throw new Error(captureData.message || 'Payment capture failed');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Payment error:', error);
+                                purchaseError.classList.remove('hidden');
+                                errorMessage.textContent = error.message;
                             });
                         },
-                        // Handle when the user cancels the payment
                         onCancel: function(data) {
                             console.log('Payment cancelled by user:', data);
-                            window.location.href = 'cancel.html'; // Redirect to cancelled page
+                            window.location.href = 'cancel.html';
                         },
-                        // Handle any errors that occur during the payment process
                         onError: function(err) {
                             console.error('PayPal error:', err);
-                            window.location.href = 'cancel.html'; // Redirect to cancelled page on error
+                            window.location.href = 'cancel.html';
                         }
-                    }).render('#paypal-button-container'); // Render the buttons into the div
+                    }).render('#paypal-button-container');
                 } catch (e) {
                     console.error("Error rendering PayPal buttons:", e);
                     purchaseError.classList.remove('hidden');
