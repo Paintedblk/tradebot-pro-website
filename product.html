@@ -147,7 +147,7 @@
                                         'Content-Type': 'application/json'
                                     },
                                     // CRITICAL CHANGE: Send the 'details' object directly
-                                    body: JSON.stringify(details)
+                                    body: JSON.stringify({version})
                                 })
                                 .then(response => {
                                     if (!response.ok) {
